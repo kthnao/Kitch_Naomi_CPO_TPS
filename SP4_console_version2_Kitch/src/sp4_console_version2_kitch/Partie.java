@@ -48,6 +48,21 @@ public class Partie {
         //crée la grille, crée les jetons et les attribue aux joueurs correspondants. 
         //Place les trous noirs (version 2) et les téléporteurs (version 3).
        grilleJeu = new Grille();
+       Random random = new Random();
+        int ligne;
+        int colonne;
+        ligne = random.nextInt(6);
+        colonne = random.nextInt(7);
+        grilleJeu.placerTrouNoir(ligne, colonne);
+        for(int i=0;i<4;i++){
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir()==true){
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+         grilleJeu.placerTrouNoir(ligne, colonne);  
+        }
        grilleJeu.afficherGrilleSurConsole();
       for(int k=0; k<21; k++){
             ListeJoueurs[0].recevoirJeton(new Jeton (ListeJoueurs[0].couleur));

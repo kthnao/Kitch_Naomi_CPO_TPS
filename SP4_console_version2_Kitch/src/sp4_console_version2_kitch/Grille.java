@@ -65,13 +65,16 @@ public class Grille {
         //Doit faire apparaitre les couleurs, et les trous noirs.
         for (int i=5; i>=0; i--){
             for(int j=0; j<7; j++){
-                //System.out.print(CellulesJeu[i][j].JetonCourant);
+                
                 if (celluleOccupee(i,j)==true){
                         if (lireCouleurDuJeton(i, j)=="rouge"){
                             System.out.print("\033[31m O  ");
                         }
                         if (lireCouleurDuJeton(i, j)=="jaune"){
                             System.out.print("\033[33m O  ");
+                        }
+                        if (CellulesJeu[i][j].presenceTrouNoir()==true){
+                            System.out.print("\033[30m X  ");
                         }
                 }
                 else {System.out.print("\033[37m O  ");
@@ -161,5 +164,19 @@ public class Grille {
         return res;
 //renvoie vrai si la colonne est remplie (on ne peut y jouer un Jeton)
     }
+    
+    public boolean placerTrouNoir(int ligne, int colonne){
+        //ajoute un trou noir à l’endroit indiqué et retourne vrai si l’ajout 
+        //s’est bien passé, ou faux sinon (exemple : trou noir déjà présent)
+        if(CellulesJeu[ligne][colonne].trouNoir==false){
+            CellulesJeu[ligne][colonne].trouNoir=true;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+   
 }
 
