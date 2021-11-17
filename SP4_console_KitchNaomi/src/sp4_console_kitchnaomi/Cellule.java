@@ -12,6 +12,7 @@ package sp4_console_kitchnaomi;
 public class Cellule {
     Jeton JetonCourant;
     boolean trouNoir; 
+    boolean desintegrateur;
     //boolean desintegrateur;
  
     
@@ -76,5 +77,53 @@ public class Cellule {
         //renvoie une référence vers le jeton de la cellule
         return JetonCourant;
     }
+    
+    public boolean supprimerJeton(){
+        //supprime le jeton et renvoie vrai si la suppression s’est bien passée, 
+        //ou faux autrement (ex : pas de jeton présent)
+        if (JetonCourant.couleur!="vide"){
+            JetonCourant=null;
+            return true;
+        }
+        else{
+           return false; 
+        }
+    }
+    
+     public boolean placerDesintegrateur() {
+        //ajoute un désintégrateur à l’endroit indiqué et retourne vrai si l’ajout
+        //s’est bien passé, ou faux sinon (exemple : désintégrateur déjà présent))
+        boolean res=false;
+        if (desintegrateur==false){
+            desintegrateur=true;
+            return true;
+        }
+        else{
+            return res;
+        }
+        
+    }
    
+     public boolean presenceDesintegrateur(){
+         //renvoie vrai si un désintégrateur est présent sur la cellule
+        boolean res=false;
+        if(desintegrateur==true){
+            return true;
+        }
+        else {
+            return res;
+        }
+     }
+     
+     public boolean recupererDesintegrateur (){
+         //supprime le désintégrateur présent de la cellule, et renvoie vrai,
+         //ou faux sinon (exemple : pas de désintégrateur présent)
+         if(desintegrateur==true){
+            desintegrateur=false;
+            return true;
+        }
+        else{
+            return false;
+        }
+     }
 }

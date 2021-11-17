@@ -12,15 +12,14 @@ package sp4_console_kitchnaomi;
 public class Joueur {
     String nom;
     String couleur;
-    //int nbDesintegrateurs; pour la V 4.0
-    int JetonsRestants;
+    int nombreJetonsRestants;
     Jeton [] ListeJetons;
-    
+    int nombreDesintegrateurs;
     
 public Joueur(String unNom) { //constructeur initialisant le nom du joueur avec son paramètre
 nom = unNom;
-//nbDesintegrateurs=0; pour la V 4.0
-JetonsRestants=0;
+nombreDesintegrateurs=0;
+nombreJetonsRestants=0;
 ListeJetons=new Jeton [21];
 }
 
@@ -38,7 +37,7 @@ public boolean recevoirJeton(Jeton J1){
          return res;
         }
     else{
-            ListeJetons[JetonsRestants]=J1;
+            ListeJetons[nombreJetonsRestants]=J1;
            
         }
         return res;
@@ -58,6 +57,26 @@ public boolean recevoirJeton(Jeton J1){
         }
         return res;
         */
-    }    
+    } 
+
+public void obtenirDesintegrateur(){
+    //incrémente le nombre de désintégrateurs du joueur
+    nombreDesintegrateurs=0;
+    
+}
         
+public boolean utiliserDesintegrateur(){
+    //décrémente le nombre de désintégrateurs et confirme l’utilisation de ce 
+    //dernier, ou renvoie faux s’il ne restait plus de désintégrateurs.
+    if(nombreDesintegrateurs==0){
+        return false;
+    }
+    else{
+        nombreDesintegrateurs=nombreDesintegrateurs--;
+        //if(JetonCourant.SupprimerJeton()==true){
+         return true;   
+        //}
+        
+    }
+    }
 }

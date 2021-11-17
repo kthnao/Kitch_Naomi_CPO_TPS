@@ -74,7 +74,11 @@ public class Grille {
         //Doit faire apparaitre les couleurs, et les trous noirs.
         for (int i = 5; i >= 0; i--) {
             for (int j = 0; j < 7; j++) {
-                if (CellulesJeu[i][j].presenceTrouNoir() == true) {
+                if (CellulesJeu[i][j].presenceDesintegrateur() == true) {
+                    System.out.print("\033[34m D ");
+                }
+                if (CellulesJeu[i][j].presenceTrouNoir() == true&&CellulesJeu[i][j].presenceDesintegrateur() == true||CellulesJeu[i][j].presenceTrouNoir() == true) {
+                    //si il ya présence d'un trou noir et d'un désintégrateur à la fois ou s'il y a seulement un trou noir
                     System.out.print("\033[30m X  ");
                 } else if (celluleOccupee(i, j) == true) {
 
@@ -211,5 +215,32 @@ public class Grille {
         return J;
 
     }
+    
+    
+    public boolean placerDesintegrateur(int ligne,int colonne){
+        //ajoute un désintégrateur à l’endroit indiqué et retourne vrai si l’ajout
+        //s’est bien passé, ou faux sinon (exemple : désintégrateur déjà présent)
+         if (CellulesJeu[ligne][colonne].desintegrateur == false) {
+            CellulesJeu[ligne][colonne].desintegrateur = true;
+            return true;
+        } else {
+            return false;
+         }
+    }
+
+    public boolean supprimerJeton(int ligne, int colonne){
+    //supprime le jeton de la cellule visée. Renvoie vrai si la suppression 
+    //s’est bien déroulée, ou faux autrement (jeton absent)
+    if(CellulesJeu[ligne-1][colonne-1].supprimerJeton()==true){
+        return true;
+    }
+    else{
+        return false;
+    }
+    
+    }
+
+   
+  
 
 }

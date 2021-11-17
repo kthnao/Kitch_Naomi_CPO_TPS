@@ -68,8 +68,8 @@ public class Partie {
         for (int k = 0; k < 21; k++) {
             ListeJoueurs[0].recevoirJeton(new Jeton(ListeJoueurs[0].couleur));
             ListeJoueurs[1].recevoirJeton(new Jeton(ListeJoueurs[1].couleur));
-            ListeJoueurs[0].JetonsRestants++;
-            ListeJoueurs[1].JetonsRestants++;
+            ListeJoueurs[0].nombreJetonsRestants++;
+            ListeJoueurs[1].nombreJetonsRestants++;
         }
 
         /* for(int k=0; k<21; k++){
@@ -133,7 +133,7 @@ public class Partie {
 
                 System.out.println("vous avez saisi la colonne : " + colonne);
 
-                while (grilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.JetonsRestants - 1], colonne) == false) {
+                while (grilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants - 1], colonne) == false) {
                     //tant que le jeton n'a pas été correctement ajouté dans la grille, le joueur doit choisir une autre colonne
                     System.out.println("La colonne choisi est soit remplie ou soit inexistante"+"\nChoisissez à nouveau le numéro de la colonne souhaitée");
                     colonne = sc.nextInt();
@@ -143,9 +143,9 @@ public class Partie {
                
                 grilleJeu.afficherGrilleSurConsole(); 
                 //affiche la grille sur la console
-                joueurCourant.ListeJetons[joueurCourant.JetonsRestants - 1] = null;
+                joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants - 1] = null;
                 //le jeton qui vient d'être joué est enlevé du tableau du joueur correspondant
-                joueurCourant.JetonsRestants = joueurCourant.JetonsRestants - 1;
+                joueurCourant.nombreJetonsRestants = joueurCourant.nombreJetonsRestants - 1;
                 //le nb de jetons restants du joueur diminue de 1 pour chaque jeton joué
 
                 if (joueurCourant == ListeJoueurs[0]) {

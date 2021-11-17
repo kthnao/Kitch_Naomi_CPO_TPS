@@ -11,7 +11,7 @@ package sp4_console_kitchnaomi;
  */
 public class Jeton {
     String couleur;
-    int nombreJetonsRestants;
+    
     
     public Jeton(String uneCouleur){
 //constructeur initialisant la couleur du jeton avec le paramètre
