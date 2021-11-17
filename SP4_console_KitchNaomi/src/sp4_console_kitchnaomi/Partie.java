@@ -211,8 +211,17 @@ public class Partie {
                     //On ajoute ce jeton à la liste des jetons du joueur
                     grilleJeu.tasserGrille(colonne);
                     grilleJeu.afficherGrilleSurConsole();
+                    
+                    if (joueurCourant == ListeJoueurs[0]) {
+                    //on échange de joueur
+                    joueurCourant = ListeJoueurs[1];
+                    } else {
+                    joueurCourant = ListeJoueurs[0];
+                }
             }
         }
+        
+        System.out.println("Félicitation"+joueurCourant+" Vous avez gagné");
     }
 
 }
