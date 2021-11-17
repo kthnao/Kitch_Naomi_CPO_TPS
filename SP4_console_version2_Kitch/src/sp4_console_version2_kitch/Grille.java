@@ -30,6 +30,9 @@ public class Grille {
         if(CellulesJeu[i][j].JetonCourant==null){
             CellulesJeu[i][j].JetonCourant=J1;
             res = true; 
+            if(CellulesJeu[i][j].presenceTrouNoir()==true){
+            CellulesJeu[i][j].activerTrouNoir();
+        }   
             break;
         }
 
@@ -67,15 +70,18 @@ public class Grille {
             for(int j=0; j<7; j++){
                 
                 if (celluleOccupee(i,j)==true){
-                        if (lireCouleurDuJeton(i, j)=="rouge"){
-                            System.out.print("\033[31m O  ");
-                        }
-                        if (lireCouleurDuJeton(i, j)=="jaune"){
-                            System.out.print("\033[33m O  ");
-                        }
-                        if (CellulesJeu[i][j].presenceTrouNoir()==true){
+                    if (CellulesJeu[i][j].presenceTrouNoir()==true){
                             System.out.print("\033[30m X  ");
                         }
+                    else{
+                            if (lireCouleurDuJeton(i, j)=="rouge"){
+                                System.out.print("\033[31m O  ");
+                            }
+                            if (lireCouleurDuJeton(i, j)=="jaune"){
+                                System.out.print("\033[33m O  ");
+                            }
+                    }
+                        
                 }
                 else {System.out.print("\033[37m O  ");
                     
@@ -92,7 +98,7 @@ public class Grille {
         boolean res=false;
         int i = ligne;
         int j =colonne;
-        if(CellulesJeu[i][j].JetonCourant!=null){
+        if(CellulesJeu[i][j].JetonCourant!=null||CellulesJeu[i][j].presenceTrouNoir()!=false){
             res = true;  
         }
         return res;

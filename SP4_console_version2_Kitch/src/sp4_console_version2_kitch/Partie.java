@@ -117,9 +117,11 @@ public class Partie {
         int colonne = sc.nextInt();
         System.out.println("vous avez saisi la colonne : "+colonne);
         grilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.JetonsRestants-1], colonne);
+        
         grilleJeu.afficherGrilleSurConsole();
         joueurCourant.ListeJetons[joueurCourant.JetonsRestants-1]=null;
         joueurCourant.JetonsRestants=joueurCourant.JetonsRestants-1;
+        
         
         
         if (joueurCourant==ListeJoueurs[0]){
