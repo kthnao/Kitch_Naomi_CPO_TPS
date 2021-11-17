@@ -71,5 +71,10 @@ public class Cellule {
             return false;
         }
     }
+    
+    public Jeton recupererJeton(){
+        //renvoie une référence vers le jeton de la cellule
+        return JetonCourant;
+    }
    
 }
