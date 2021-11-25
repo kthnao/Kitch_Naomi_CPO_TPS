@@ -61,7 +61,7 @@ public boolean recevoirJeton(Jeton J1){
 
 public void obtenirDesintegrateur(){
     //incrémente le nombre de désintégrateurs du joueur
-    nombreDesintegrateurs=0;
+    nombreDesintegrateurs+=1;
     
 }
         
@@ -72,7 +72,7 @@ public boolean utiliserDesintegrateur(){
         return false;
     }
     else{
-        nombreDesintegrateurs=nombreDesintegrateurs--;
+        nombreDesintegrateurs--;
         //if(JetonCourant.SupprimerJeton()==true){
          return true;   
         //}

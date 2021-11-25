@@ -35,13 +35,16 @@ public class Partie {
         int nb;
         nb = random.nextInt(2);
         if (nb == 0) { //si nb=0
-            ListeJoueurs[0].couleur = "jaune"; 
+            ListeJoueurs[0].couleur = "jaune";
             //joueur1 est associé  à la couleur jaune
             ListeJoueurs[1].couleur = "rouge";
+            //joueur2 est associé  à la couleur rouge
         }
         if (nb == 1) {
             ListeJoueurs[0].couleur = "rouge";
+            //joueur1 est associé  à la couleur rouge
             ListeJoueurs[1].couleur = "jaune";
+            //joueur2 est associé  à la couleur jaune
         }
     }
 
@@ -52,18 +55,44 @@ public class Partie {
         Random random = new Random();
         int ligne;
         int colonne;
-        ligne = random.nextInt(6);
-        colonne = random.nextInt(7);
+        ligne = random.nextInt(6); //ligne prend une valeur comprise entre 0 et 5
+        colonne = random.nextInt(7);//ligne prend une valeur comprise entre 0 et 6
         grilleJeu.placerTrouNoir(ligne, colonne);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
             while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
                 ligne = random.nextInt(6);
                 colonne = random.nextInt(7);
             }
             grilleJeu.placerTrouNoir(ligne, colonne);
+            grilleJeu.placerDesintegrateur(ligne, colonne);
+            //On place 2 désintégrateurs/trou noirs au même coordonnées
         }
+        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+            grilleJeu.placerTrouNoir(ligne, colonne);
+            //On place les 2 derniers trou noirs (on a donc 5 en tout)
+        }
+        for (int i = 0; i < 3; i++) { //Répétition de 3 fois 
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+            grilleJeu.placerDesintegrateur(ligne, colonne);
+            //On place les 3 derniers désintégrateurs (on a donc 5 en tout)
+        }
+
         grilleJeu.afficherGrilleSurConsole();
         for (int k = 0; k < 21; k++) {
             ListeJoueurs[0].recevoirJeton(new Jeton(ListeJoueurs[0].couleur));
@@ -86,9 +115,22 @@ public class Partie {
          */
     }
 
-    public void debuterPartie() {
-        //lance la partie
-        String c = null; 
+    public void debuterPartie() {//lance la partie
+
+        Scanner sc;
+        /*
+        System.out.println("bonjour veuillez saisir un pseudo pour le premier joueur");
+        sc = new Scanner(System.in);
+        String nom1 = sc.next(); //On demande de saisir le pseudo du joueur 1
+        Joueur joueur1 = new Joueur(nom1);
+        
+        System.out.println("bonjour veuillez saisir un pseudo pour le deuxième joueur");
+        sc = new Scanner(System.in);
+        String nom2 = sc.next();//On demande de saisir le pseudo du joueur 2
+        Joueur joueur2 = new Joueur(nom2);
+         */
+
+        String c = null;
         //initialisation de la variable c qui prendra une couleur par la suite
         Random random = new Random();
         int nb;
@@ -107,15 +149,36 @@ public class Partie {
 
         while (grilleJeu.etreGagnantePourJoueur(joueurCourant) == false || grilleJeu.etreRemplie() == false) {
             //tant qu'il n'ya pas de gagnant ou tant que la grille n'est pas pleine
-            System.out.println("Si vous voulez jouer un Jeton entrez 1" + "\nSi vous voulez récupérer un Jeton entrez 2");
-            Scanner sc;
-            sc = new Scanner(System.in);
-            int choix = sc.nextInt();
 
-            while (choix < 1 || choix > 2) { //tant que choix n'est pas 2 ou 1
+            System.out.println("C'est à vous de jouer" + joueurCourant);
+            //On annonce le joueur qui doit jouer
+
+            System.out.println("Vous avez " + joueurCourant.nombreDesintegrateurs + " désintégrateurs utilisables et " + joueurCourant.nombreJetonsRestants + " Jetons restants à jouer");
+            //On indique l'inventaire du joueur au joueur
+
+            System.out.println("Si vous voulez jouer un Jeton entrez 1" + "\nSi vous voulez récupérer un Jeton entrez 2" + "\nSi vous voulez utiliser un désintégrateur entrez 3");
+            //On demande au joueur quel action il veut faire entre les 3 actions citées
+
+            sc = new Scanner(System.in);
+            int choix = sc.nextInt(); //On demande au joueur son choix
+
+            while (choix < 1 || choix > 3) { //tant que choix n'est pas 1 2 ou 3
                 System.out.println("Ce choix est inexistant, veuillez choisir à nouveau");
-                System.out.println("Si vous voulez jouer un Jeton entrez 1" + "\nSi vous voulez récupérer un Jeton entrez 2");
+                System.out.println("Si vous voulez jouer un Jeton entrez 1" + "\nSi vous voulez récupérer un Jeton entrez 2"+"\nSi vous voulez utiliser un désintégrateur entrez 3");
                 choix = sc.nextInt();
+                //Le joueur doit rentrer à nouveau son choix
+
+            }
+            if (choix == 3 && joueurCourant.nombreDesintegrateurs == 0) {
+                System.out.println("Vous n'avez pas de désintégrateur à jouer, veuillez choisir un autre choix (1 pour jouer un jeton ou 2 pour récupérer un jeton)");
+                choix = sc.nextInt(); //On redemande au joueur de  faire son choix
+                while (choix < 1 || choix > 2) { //tant que choix n'est pas 1 ou 2 
+                    System.out.println("Ce choix est inexistant ou impossible, veuillez choisir à nouveau");
+                    System.out.println("Si vous voulez jouer un Jeton entrez 1" + "\nSi vous voulez récupérer un Jeton entrez 2");
+                    choix = sc.nextInt();
+                    //Le joueur doit rentrer à nouveau son choix
+
+                }
             }
 
             if (choix == 1) { //si choix=1, le joueur souhaite jouer un jeton
@@ -124,7 +187,7 @@ public class Partie {
                 //le joueur saisi la colonne dans laquelle il vuet jouer son jeton
                 int colonne = sc.nextInt();
 
-                while (colonne < 1 || colonne > 7) { 
+                while (colonne < 1 || colonne > 7) {
                     //si le numéro de la colonne n'est pas compris entre 1 et 7
                     System.out.println("la colonne choisie est inexistante");
                     System.out.println("Choisissez à nouveau le numéro de la colonne souhaitée");
@@ -135,13 +198,21 @@ public class Partie {
 
                 while (grilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants - 1], colonne) == false) {
                     //tant que le jeton n'a pas été correctement ajouté dans la grille, le joueur doit choisir une autre colonne
-                    System.out.println("La colonne choisi est soit remplie ou soit inexistante"+"\nChoisissez à nouveau le numéro de la colonne souhaitée");
+                    System.out.println("La colonne choisi est soit remplie ou soit inexistante" + "\nChoisissez à nouveau le numéro de la colonne souhaitée");
                     colonne = sc.nextInt();
 
                 }
 
-               
-                grilleJeu.afficherGrilleSurConsole(); 
+                for (int i = 0; i < 6; i++) {
+                    //On vérifie dans toutes les lignes de la colonne choisi s'il y a la présence d'un désintégrateur et d'un jeton
+                    if (grilleJeu.CellulesJeu[i][colonne].presenceDesintegrateur() == true && grilleJeu.celluleOccupee(i, colonne) == true) {
+                        //si il y a, alors on active récupérer désintégrateur qui supprime le désintégrateur
+                        grilleJeu.CellulesJeu[i][colonne].recupererDesintegrateur();
+                        joueurCourant.nombreDesintegrateurs++; //Le joueur gagne donc 1 désintégrateur en plus
+                    }
+                }
+
+                grilleJeu.afficherGrilleSurConsole();
                 //affiche la grille sur la console
                 joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants - 1] = null;
                 //le jeton qui vient d'être joué est enlevé du tableau du joueur correspondant
@@ -155,7 +226,7 @@ public class Partie {
                     joueurCourant = ListeJoueurs[0];
                 }
 
-            } else { //si choix=2, le joueur souhaite récupérer un jeton
+            } else if (choix == 2) { //si choix=2, le joueur souhaite récupérer un jeton
                 System.out.println("Choisissez  les coordonnées souhaitées" + "\n Commencez à entrer le numéro la ligne");
                 int ligne = sc.nextInt();
                 //le joueur commence à saisir le numéro de la ligne souhaitée
@@ -177,11 +248,9 @@ public class Partie {
                 }
 
                 System.out.println("vous avez saisi les coordonnées: " + ligne + "(ligne)" + colonne + "(colonne)");
-              
-                
-                
-                while(joueurCourant.couleur != grilleJeu.lireCouleurDuJeton(ligne-1, colonne-1)) {
-                    //si la couleur du jeton choisi ne correspond pas à la couleur du joueur, le joueur doit saisir les coordonnées
+
+                while (joueurCourant.couleur != grilleJeu.lireCouleurDuJeton(ligne - 1, colonne - 1)) {
+                    //tant que la couleur du jeton choisi ne correspond pas à la couleur du joueur, le joueur doit saisir les coordonnées
                     //d'un autre jeton qui correspond à sa couleur
                     System.out.println("vous avez saisi les coordonnées d'un pion qui n'est pas le votre");
                     //System.out.println("attendu :" + joueurCourant.couleur + "trouvé : "+ grilleJeu.lireCouleurDuJeton(ligne, colonne));
@@ -202,26 +271,53 @@ public class Partie {
                         System.out.println("Choisissez à nouveau le numéro de la colonne souhaitée");
                         colonne = sc.nextInt();
                     }
-                
+
                 }
-                //si la couleur correspond à celle du joueur
-                    Jeton j = grilleJeu.recupererJeton(ligne, colonne);
-                    //On récupère ce jeton et on le supprime de la grille
-                    joueurCourant.recevoirJeton(j);
-                    //On ajoute ce jeton à la liste des jetons du joueur
-                    grilleJeu.tasserGrille(colonne);
-                    grilleJeu.afficherGrilleSurConsole();
-                    
-                    if (joueurCourant == ListeJoueurs[0]) {
+                //si la couleur correspond à celle du joueur directement
+                Jeton j = grilleJeu.recupererJeton(ligne, colonne);
+                //On récupère ce jeton et on le supprime de la grille
+                joueurCourant.recevoirJeton(j);
+                //On ajoute ce jeton à la liste des jetons du joueur
+                grilleJeu.tasserGrille(colonne);
+                grilleJeu.afficherGrilleSurConsole();
+
+                if (joueurCourant == ListeJoueurs[0]) {
                     //on échange de joueur
                     joueurCourant = ListeJoueurs[1];
-                    } else {
+                } else {
                     joueurCourant = ListeJoueurs[0];
                 }
+            } else {//Si choix=3 le joueur souhaite utiliser un désintégrateur
+
+                System.out.println("Choisissez  les coordonnées souhaitées" + "\n Commencez à entrer le numéro la ligne");
+                int ligne = sc.nextInt();
+                //le joueur commence à saisir le numéro de la ligne souhaitée
+
+                while (ligne < 1 || ligne > 6) { //si le numéro de la ligne n'est pas entre 1 et 6
+                    System.out.println("la colonne choisie est inexistante");
+                    System.out.println("Choisissez à nouveau le numéro de la ligne souhaitée");
+                    ligne = sc.nextInt();
+                }
+
+                System.out.println("entrez le numéro la colonne souhaitée");
+                int colonne = sc.nextInt();
+                //le joueur saisi le numéro de la colonne souhaitée 
+
+                while (colonne < 1 || colonne > 7) {//si le numéro de la colonne n'est pas entre 1 et 7
+                    System.out.println("la colonne choisie est inexistante");
+                    System.out.println("Choisissez à nouveau le numéro de la colonne souhaitée");
+                    colonne = sc.nextInt();
+                }
+
+                System.out.println("vous avez saisi les coordonnées: " + ligne + "(ligne)" + colonne + "(colonne)");
+                grilleJeu.supprimerJeton(ligne, colonne); //On supprime le jeton voulu
+          
+                joueurCourant.nombreDesintegrateurs--; //Le joueur à un désintégrateur en moins
+
             }
         }
-        
-        System.out.println("Félicitation"+joueurCourant+" Vous avez gagné");
+
+        System.out.println("Félicitation" + joueurCourant + " Vous avez gagné");
     }
 
 }

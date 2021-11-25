@@ -13,7 +13,7 @@ public class Cellule {
     Jeton JetonCourant;
     boolean trouNoir; 
     boolean desintegrateur;
-    //boolean desintegrateur;
+    
  
     
     public Cellule(){//constructeur initialisant les attributs avec des valeurs par défaut
@@ -24,15 +24,16 @@ public class Cellule {
     public boolean affecterJeton(Jeton J1){
 // ajoute le jeton en paramètre à la cellule, et retourne vrai si l’ajout 
 //s’est bien passé, ou faux sinon (ex : jeton déjà présent)  
-        if (JetonCourant==null){
-        JetonCourant=J1;
+        if (JetonCourant==null){ // s'il n'y a pas de jeton présent
+        JetonCourant=J1; //alors on place le jeton
         return true;
         }
         else {
         return false;
         }
     }
-    public String lireCouleurDuJeton(){//renvoie la couleur du jeton occupant la cellule
+    public String lireCouleurDuJeton(){
+//renvoie la couleur du jeton occupant la cellule
         return JetonCourant.couleur;
     }
     
@@ -40,8 +41,8 @@ public class Cellule {
         //ajoute un trou noir à l’endroit indiqué et retourne vrai si l’ajout s’est 
         //bien passé, ou faux sinon (exemple : trou noir déjà présent)
         boolean res=false;
-        if (trouNoir==false){
-            trouNoir=true;
+        if (trouNoir==false){ //s'il n'y a pas de trou noir 
+            trouNoir=true;//alors on en rajoute 1
             return true;
         }
         else{
@@ -52,7 +53,7 @@ public class Cellule {
     public boolean presenceTrouNoir(){
         //renvoie vrai si un trou noir est présent sur la cellule
         boolean res=false;
-        if(trouNoir==true){
+        if(trouNoir==true){//s'il y a un trou noir
             return true;
         }
         else {
@@ -64,8 +65,9 @@ public class Cellule {
         //active le trou noir : le trou noir engloutit le jeton et disparait. 
         //Retourne vrai si tout s’est correctement déroulé, ou faux sinon (pas de trou noir)
         if(trouNoir==true){
-            trouNoir=false;
-            JetonCourant=null;
+            trouNoir=false; //on supprime le trou noir
+            JetonCourant=null;//on active le trou noir en supprimant le jeton qui l'a activé
+            System.out.println("Votre pion a été englouti par le trou noir");
             return true;
         }
         else{
@@ -81,7 +83,7 @@ public class Cellule {
     public boolean supprimerJeton(){
         //supprime le jeton et renvoie vrai si la suppression s’est bien passée, 
         //ou faux autrement (ex : pas de jeton présent)
-        if (JetonCourant.couleur!="vide"){
+        if (JetonCourant!=null){
             JetonCourant=null;
             return true;
         }
@@ -94,8 +96,8 @@ public class Cellule {
         //ajoute un désintégrateur à l’endroit indiqué et retourne vrai si l’ajout
         //s’est bien passé, ou faux sinon (exemple : désintégrateur déjà présent))
         boolean res=false;
-        if (desintegrateur==false){
-            desintegrateur=true;
+        if (desintegrateur==false){ //s'il n'y a pas de désintégrateur
+            desintegrateur=true;//zlors on en rajoute 1
             return true;
         }
         else{
@@ -107,7 +109,7 @@ public class Cellule {
      public boolean presenceDesintegrateur(){
          //renvoie vrai si un désintégrateur est présent sur la cellule
         boolean res=false;
-        if(desintegrateur==true){
+        if(desintegrateur==true){//s'il y a un désintégrateur
             return true;
         }
         else {
@@ -119,7 +121,7 @@ public class Cellule {
          //supprime le désintégrateur présent de la cellule, et renvoie vrai,
          //ou faux sinon (exemple : pas de désintégrateur présent)
          if(desintegrateur==true){
-            desintegrateur=false;
+            desintegrateur=false;//on supprime le désintégrateur présent
             return true;
         }
         else{
