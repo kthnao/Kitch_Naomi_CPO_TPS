@@ -73,7 +73,7 @@ public class Partie {
         for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
-            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true&&grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true) {
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
                 //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
                 ligne = random.nextInt(6);
                 colonne = random.nextInt(7);
@@ -85,7 +85,7 @@ public class Partie {
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
             while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true&&grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
-                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir ou un désintégrateur
                 ligne = random.nextInt(6);
                 colonne = random.nextInt(7);
             }
