@@ -73,7 +73,7 @@ public class Partie {
         for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
-            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true&&grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true) {
                 //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
                 ligne = random.nextInt(6);
                 colonne = random.nextInt(7);
@@ -84,7 +84,7 @@ public class Partie {
         for (int i = 0; i < 3; i++) { //Répétition de 3 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
-            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true) {
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true&&grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
                 //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
                 ligne = random.nextInt(6);
                 colonne = random.nextInt(7);
@@ -331,8 +331,23 @@ public class Partie {
 
             }
         }
-
-        System.out.println("Félicitation" + joueurCourant.nom + " Vous avez gagné");
+        if(grilleJeu.etreRemplie() == true){
+            System.out.println("la grille est pleine, il n'y a pas de gagnant");
+        }
+        else if(grilleJeu.etreGagnantePourJoueur(ListeJoueurs[1]) == true&&grilleJeu.etreGagnantePourJoueur(ListeJoueurs[0]) == true){
+            //s'il y a égalité
+            System.out.println("Félicitation" + joueurCourant.nom + " Vous avez gagné");
+        }
+        else {
+            if (joueurCourant == ListeJoueurs[0]) {
+                    //on échange de joueur car c'est le joueur d'avant qui a gagné
+                    joueurCourant = ListeJoueurs[1];
+                } else {
+                    joueurCourant = ListeJoueurs[0];
+                }
+            System.out.println("Félicitation" + joueurCourant.nom + " Vous avez gagné");
+        }
+        
     }
-
+    
 }
