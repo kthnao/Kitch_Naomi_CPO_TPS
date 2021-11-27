@@ -184,10 +184,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         getContentPane().add(panneau_info_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 290, 230));
 
         btn_col_0.setText("1");
-        getContentPane().add(btn_col_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        getContentPane().add(btn_col_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         btn_col_1.setText("2");
-        getContentPane().add(btn_col_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        getContentPane().add(btn_col_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         btn_col_2.setText("3");
         btn_col_2.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +195,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_col_2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_col_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
+        getContentPane().add(btn_col_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
         btn_col_3.setText("4");
         btn_col_3.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +203,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_col_3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_col_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
+        getContentPane().add(btn_col_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, -1, -1));
 
         btn_col_4.setText("5");
         btn_col_4.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +211,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_col_4ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_col_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, -1, -1));
+        getContentPane().add(btn_col_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, -1, -1));
 
         btn_col_5.setText("6");
         btn_col_5.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +219,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_col_5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_col_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
+        getContentPane().add(btn_col_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
 
         btn_col_6.setText("7");
         btn_col_6.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +227,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_col_6ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_col_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
+        getContentPane().add(btn_col_6, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, -1, -1));
 
         setBounds(0, 0, 1200, 740);
     }// </editor-fold>//GEN-END:initComponents
