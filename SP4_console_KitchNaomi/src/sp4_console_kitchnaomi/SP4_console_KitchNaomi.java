@@ -30,7 +30,6 @@ public class SP4_console_KitchNaomi {
         String nom2 = sc.next();//On demande de saisir le pseudo du joueur 2
         Joueur joueur2 = new Joueur(nom2);
         Partie part1=new Partie(joueur1,joueur2);
-        part1.attribuerCouleursAuxJoueurs();
         part1.initialiserPartie();
         part1.debuterPartie();
     }
