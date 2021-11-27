@@ -151,7 +151,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_j2_desint1">
+        <Component class="javax.swing.JLabel" name="lbl_j2_desint">
           <Properties>
             <Property name="text" type="java.lang.String" value="nbdesintjoueur2"/>
           </Properties>
@@ -191,7 +191,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbl_j2_couleur1">
+        <Component class="javax.swing.JLabel" name="lbl_j2_couleur">
           <Properties>
             <Property name="text" type="java.lang.String" value="couleurjoueur2"/>
           </Properties>
@@ -326,7 +326,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="160" y="60" width="80" height="20"/>
+              <AbsoluteConstraints x="140" y="60" width="80" height="20"/>
             </Constraint>
           </Constraints>
         </Component>

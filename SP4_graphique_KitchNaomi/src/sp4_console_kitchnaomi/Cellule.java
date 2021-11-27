@@ -33,6 +33,9 @@ public class Cellule {
         }
     }
     public String lireCouleurDuJeton(){//renvoie la couleur du jeton occupant la cellule
+        if (JetonCourant==null){ //s'il n'y a pas de jeton la couleur est vide
+            return "vide";
+        }
         return JetonCourant.couleur;
     }
     

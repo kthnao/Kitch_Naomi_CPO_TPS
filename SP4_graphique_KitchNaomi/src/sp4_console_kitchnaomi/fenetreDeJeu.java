@@ -5,6 +5,8 @@
  */
 package sp4_console_kitchnaomi;
 
+import java.util.Random;
+
 /**
  *
  * @author naomi
@@ -51,11 +53,11 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_j1_couleur = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
-        lbl_j2_desint1 = new javax.swing.JLabel();
+        lbl_j2_desint = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lbl_j2_nom = new javax.swing.JLabel();
-        lbl_j2_couleur1 = new javax.swing.JLabel();
+        lbl_j2_couleur = new javax.swing.JLabel();
         panneau_creation_partie = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -113,8 +115,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         jLabel6.setText("désintégrateurs :");
         panneau_info_joueurs.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 130, 20));
 
-        lbl_j2_desint1.setText("nbdesintjoueur2");
-        panneau_info_joueurs.add(lbl_j2_desint1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
+        lbl_j2_desint.setText("nbdesintjoueur2");
+        panneau_info_joueurs.add(lbl_j2_desint, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
 
         jLabel9.setText("couleur : ");
         panneau_info_joueurs.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 60, 20));
@@ -125,8 +127,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_j2_nom.setText("nomjoueur2 ");
         panneau_info_joueurs.add(lbl_j2_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
-        lbl_j2_couleur1.setText("couleurjoueur2");
-        panneau_info_joueurs.add(lbl_j2_couleur1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
+        lbl_j2_couleur.setText("couleurjoueur2");
+        panneau_info_joueurs.add(lbl_j2_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, -1, -1));
 
         getContentPane().add(panneau_info_joueurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 290, 230));
 
@@ -171,7 +173,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_info_partie.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         lbl_jcourant.setText("nomjoueur ");
-        panneau_info_partie.add(lbl_jcourant, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 80, 20));
+        panneau_info_partie.add(lbl_jcourant, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 80, 20));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -231,8 +233,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_startActionPerformed
-        panneau_info_joueurs.setVisible(true);
-        panneau_info_partie.setVisible(true);
+        //lorsqu'on active le bouton
+        panneau_info_joueurs.setVisible(true); //fait apparaître les infos des joueurs
+        panneau_info_partie.setVisible(true); //fait apparapitre les infos de la partie
+        initialiserPartie(); //initialise la partie en appelant la méthode initialiser partie
+        panneau_grille.repaint(); //actualise la grille sans qu'on est besoin de passer la souris sur les cases
+        btn_start.setEnabled(false); //le bouton ne peut plus être réutiliser après sa première utilisation
     }//GEN-LAST:event_btn_startActionPerformed
 
     private void nom_joueur2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nom_joueur2ActionPerformed
@@ -293,6 +299,125 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void attribuerCouleursAuxJoueurs() {
+        //attribue des couleurs aux joueurs
+        Random random = new Random();
+        int nb;
+        nb = random.nextInt(2);
+        if (nb == 0) { //si nb=0
+            ListeJoueurs[0].couleur = "jaune";
+            //joueur1 est associé  à la couleur jaune
+            ListeJoueurs[1].couleur = "rouge";
+            //joueur2 est associé  à la couleur rouge
+        }
+        if (nb == 1) {
+            ListeJoueurs[0].couleur = "rouge";
+            //joueur1 est associé  à la couleur rouge
+            ListeJoueurs[1].couleur = "jaune";
+            //joueur2 est associé  à la couleur jaune
+        }
+    }
+    
+        public void initialiserPartie() {
+        String nomJoueur1 = nom_joueur1.getText();
+        Joueur J1=new Joueur(nomJoueur1);
+        String nomJoueur2 = nom_joueur2.getText();
+        Joueur J2=new Joueur(nomJoueur2);
+         ListeJoueurs[0]=J1;
+         ListeJoueurs[1]=J2;
+               
+            
+        //crée la grille, crée les jetons et les attribue aux joueurs correspondants. 
+        //Place les trous noirs (version 2) et les téléporteurs (version 3).
+        Random random = new Random();
+        int ligne;
+        int colonne;
+        ligne = random.nextInt(6); //ligne prend une valeur comprise entre 0 et 5
+        colonne = random.nextInt(7);//ligne prend une valeur comprise entre 0 et 6
+        grilleJeu.placerTrouNoir(ligne, colonne);
+        
+        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+            grilleJeu.placerTrouNoir(ligne, colonne);
+            //On place 2 trou noirs (on a donc 3 en tout)
+        }
+        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+            grilleJeu.placerTrouNoir(ligne, colonne);
+            grilleJeu.placerDesintegrateur(ligne, colonne);
+            //On place 2 désintégrateurs/trou noirs au même coordonnées (2 désintégrateurs et 5 trous noirs en tout)
+        }
+        
+        for (int i = 0; i < 3; i++) { //Répétition de 3 fois 
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true||grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir ou un désintégrateur
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+            grilleJeu.placerDesintegrateur(ligne, colonne);
+            //On place les 3 derniers désintégrateurs (on a donc 5 en tout)
+        }
+
+            attribuerCouleursAuxJoueurs(); //on attribu les couleurs aux joueurs
+        
+        //On indique aux joueurs leur couleur
+        System.out.println(J1.nom+" est de couleur "+J1.couleur); 
+        System.out.println(J2.nom+" est de couleur "+J2.couleur);
+        
+        lbl_j1_nom.setText(nomJoueur1); //sur la fenêtre le lbl_J1_nom prend comme valeur le pseudo entrer pour le J1
+        lbl_j2_nom.setText(nomJoueur2);//sur la fenêtre le lbl_J2_nom prend comme valeur le pseudo entrer pour le J2
+        
+        lbl_j1_couleur.setText(J1.couleur);//le lbl_j1_couleur affiche la couleur du joueur1
+        lbl_j2_couleur.setText(J2.couleur);//le lbl_j2_couleur affiche la couleur du joueur2
+        
+        lbl_j1_desint.setText(J1.nombreDesintegrateurs+"");//le lbl_j1_desint affiche le nombre de désintegrateur du joueur1
+        lbl_j2_desint.setText(J2.nombreDesintegrateurs+"");//le lbl_j2_desint affiche le nombre de désintegrateur du joueur2
+        //on rajoute "" pour que ce soit un String car sinon nombreDesintegrateur est un entier et on veut un string
+       
+        String c = null;
+        //initialisation de la variable c qui prendra une couleur par la suite
+        int nb;
+        nb = random.nextInt(2); //nb prend une valeur aléatoire 0 ou 1
+        if (nb == 0) {
+            c = "rouge"; //c prrend la valeur "rouge" si nb=0
+        }
+        if (nb == 1) {
+            c = "jaune";//c prrend la valeur "rouge" si nb=1
+        }
+        if (J2.couleur == c) { //si la couleur du joueur 2 est la même que c alors il commence à jouer
+            joueurCourant = J2;
+        } else {
+            joueurCourant = J1;//sinon c'est l'autre joueur qui joue
+        }
+        
+        lbl_jcourant.setText(joueurCourant.nom);//affiche le pseudo du joueur courant dans le lbl_jcourant
+        
+        for (int k = 0; k < 21; k++) {
+            J1.recevoirJeton(new Jeton(J1.couleur)); //on associe les jetons de la bonne couleur au joueur1
+           J2.recevoirJeton(new Jeton(J2.couleur)); //on associe les jetons de la bonne couleur au joueur2
+            J1.nombreJetonsRestants++;
+            J2.nombreJetonsRestants++;
+            
+         grilleJeu.afficherGrilleSurConsole();
+        }
+       
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_col_0;
@@ -320,8 +445,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_j1_couleur;
     private javax.swing.JLabel lbl_j1_desint;
     private javax.swing.JLabel lbl_j1_nom;
-    private javax.swing.JLabel lbl_j2_couleur1;
-    private javax.swing.JLabel lbl_j2_desint1;
+    private javax.swing.JLabel lbl_j2_couleur;
+    private javax.swing.JLabel lbl_j2_desint;
     private javax.swing.JLabel lbl_j2_nom;
     private javax.swing.JLabel lbl_jcourant;
     private javax.swing.JScrollPane message;

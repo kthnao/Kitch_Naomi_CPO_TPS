@@ -48,7 +48,7 @@ public class Partie {
         }
     }
 
-    public void initialiserPartie() {
+        public void initialiserPartie() {
         //crée la grille, crée les jetons et les attribue aux joueurs correspondants. 
         //Place les trous noirs (version 2) et les téléporteurs (version 3).
         grilleJeu = new Grille();
@@ -58,6 +58,18 @@ public class Partie {
         ligne = random.nextInt(6); //ligne prend une valeur comprise entre 0 et 5
         colonne = random.nextInt(7);//ligne prend une valeur comprise entre 0 et 6
         grilleJeu.placerTrouNoir(ligne, colonne);
+        
+        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+            grilleJeu.placerTrouNoir(ligne, colonne);
+            //On place 2 trou noirs (on a donc 3 en tout)
+        }
         for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
@@ -68,24 +80,14 @@ public class Partie {
             }
             grilleJeu.placerTrouNoir(ligne, colonne);
             grilleJeu.placerDesintegrateur(ligne, colonne);
-            //On place 2 désintégrateurs/trou noirs au même coordonnées
+            //On place 2 désintégrateurs/trou noirs au même coordonnées (2 désintégrateurs et 5 trous noirs en tout)
         }
-        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
-            ligne = random.nextInt(6);
-            colonne = random.nextInt(7);
-            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true&&grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true) {
-                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
-                ligne = random.nextInt(6);
-                colonne = random.nextInt(7);
-            }
-            grilleJeu.placerTrouNoir(ligne, colonne);
-            //On place les 2 derniers trou noirs (on a donc 5 en tout)
-        }
+        
         for (int i = 0; i < 3; i++) { //Répétition de 3 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
-            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true&&grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
-                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true||grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir ou un désintégrateur
                 ligne = random.nextInt(6);
                 colonne = random.nextInt(7);
             }
@@ -93,12 +95,19 @@ public class Partie {
             //On place les 3 derniers désintégrateurs (on a donc 5 en tout)
         }
 
-        grilleJeu.afficherGrilleSurConsole();
+            attribuerCouleursAuxJoueurs(); //on attribu les couleurs aux joueurs
+        
+        //On indique aux joueurs leur couleur
+        System.out.println(ListeJoueurs[0].nom+" est de couleur "+ListeJoueurs[0].couleur); 
+        System.out.println(ListeJoueurs[1].nom+" est de couleur "+ListeJoueurs[1].couleur);
+
         for (int k = 0; k < 21; k++) {
-            ListeJoueurs[0].recevoirJeton(new Jeton(ListeJoueurs[0].couleur));
-            ListeJoueurs[1].recevoirJeton(new Jeton(ListeJoueurs[1].couleur));
+            ListeJoueurs[0].recevoirJeton(new Jeton(ListeJoueurs[0].couleur)); //on associe les jetons de la bonne couleur au joueur1
+            ListeJoueurs[1].recevoirJeton(new Jeton(ListeJoueurs[1].couleur)); //on associe les jetons de la bonne couleur au joueur2
             ListeJoueurs[0].nombreJetonsRestants++;
             ListeJoueurs[1].nombreJetonsRestants++;
+            
+         grilleJeu.afficherGrilleSurConsole();
         }
 
         /* for(int k=0; k<21; k++){
@@ -333,10 +342,12 @@ public class Partie {
         }
         if(grilleJeu.etreRemplie() == true){
             System.out.println("la grille est pleine, il n'y a pas de gagnant");
+            grilleJeu.viderGrille();
         }
         else if(grilleJeu.etreGagnantePourJoueur(ListeJoueurs[1]) == true&&grilleJeu.etreGagnantePourJoueur(ListeJoueurs[0]) == true){
             //s'il y a égalité
             System.out.println("Félicitation" + joueurCourant.nom + " Vous avez gagné");
+            grilleJeu.viderGrille();
         }
         else {
             if (joueurCourant == ListeJoueurs[0]) {
@@ -346,6 +357,7 @@ public class Partie {
                     joueurCourant = ListeJoueurs[0];
                 }
             System.out.println("Félicitation" + joueurCourant.nom + " Vous avez gagné");
+            grilleJeu.viderGrille();
         }
         
     }
