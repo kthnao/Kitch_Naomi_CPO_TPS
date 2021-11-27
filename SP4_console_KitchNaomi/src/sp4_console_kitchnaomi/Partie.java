@@ -94,11 +94,17 @@ public class Partie {
             grilleJeu.placerDesintegrateur(ligne, colonne);
             //On place les 3 derniers désintégrateurs (on a donc 5 en tout)
         }
-
+        
+        attribuerCouleursAuxJoueurs(); //on attribu les couleurs aux joueurs
+        
+        //On indique aux joueurs leur couleur
+        System.out.println(ListeJoueurs[0].nom+" est de couleur "+ListeJoueurs[0].couleur); 
+        System.out.println(ListeJoueurs[1].nom+" est de couleur "+ListeJoueurs[1].couleur);
+        
         grilleJeu.afficherGrilleSurConsole();
         for (int k = 0; k < 21; k++) {
-            ListeJoueurs[0].recevoirJeton(new Jeton(ListeJoueurs[0].couleur));
-            ListeJoueurs[1].recevoirJeton(new Jeton(ListeJoueurs[1].couleur));
+            ListeJoueurs[0].recevoirJeton(new Jeton(ListeJoueurs[0].couleur)); //on associe les jetons de la bonne couleur au joueur1
+            ListeJoueurs[1].recevoirJeton(new Jeton(ListeJoueurs[1].couleur)); //on associe les jetons de la bonne couleur au joueur2
             ListeJoueurs[0].nombreJetonsRestants++;
             ListeJoueurs[1].nombreJetonsRestants++;
         }
