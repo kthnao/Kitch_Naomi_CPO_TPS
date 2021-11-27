@@ -58,6 +58,18 @@ public class Partie {
         ligne = random.nextInt(6); //ligne prend une valeur comprise entre 0 et 5
         colonne = random.nextInt(7);//ligne prend une valeur comprise entre 0 et 6
         grilleJeu.placerTrouNoir(ligne, colonne);
+        
+        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
+            ligne = random.nextInt(6);
+            colonne = random.nextInt(7);
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
+                ligne = random.nextInt(6);
+                colonne = random.nextInt(7);
+            }
+            grilleJeu.placerTrouNoir(ligne, colonne);
+            //On place 2 trou noirs (on a donc 3 en tout)
+        }
         for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
@@ -68,23 +80,13 @@ public class Partie {
             }
             grilleJeu.placerTrouNoir(ligne, colonne);
             grilleJeu.placerDesintegrateur(ligne, colonne);
-            //On place 2 désintégrateurs/trou noirs au même coordonnées
+            //On place 2 désintégrateurs/trou noirs au même coordonnées (2 désintégrateurs et 5 trous noirs en tout)
         }
-        for (int i = 0; i < 2; i++) { //Répétition de 2 fois 
-            ligne = random.nextInt(6);
-            colonne = random.nextInt(7);
-            while (grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
-                //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir
-                ligne = random.nextInt(6);
-                colonne = random.nextInt(7);
-            }
-            grilleJeu.placerTrouNoir(ligne, colonne);
-            //On place les 2 derniers trou noirs (on a donc 5 en tout)
-        }
+        
         for (int i = 0; i < 3; i++) { //Répétition de 3 fois 
             ligne = random.nextInt(6);
             colonne = random.nextInt(7);
-            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true&&grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
+            while (grilleJeu.CellulesJeu[ligne][colonne].presenceDesintegrateur() == true||grilleJeu.CellulesJeu[ligne][colonne].presenceTrouNoir() == true) {
                 //On créer des coordonnées aléatoire tant que ces dernières ont déjà un trou noir ou un désintégrateur
                 ligne = random.nextInt(6);
                 colonne = random.nextInt(7);
