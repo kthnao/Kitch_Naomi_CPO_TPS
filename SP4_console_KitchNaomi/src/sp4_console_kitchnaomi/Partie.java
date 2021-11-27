@@ -333,10 +333,12 @@ public class Partie {
         }
         if(grilleJeu.etreRemplie() == true){
             System.out.println("la grille est pleine, il n'y a pas de gagnant");
+            grilleJeu.viderGrille();
         }
         else if(grilleJeu.etreGagnantePourJoueur(ListeJoueurs[1]) == true&&grilleJeu.etreGagnantePourJoueur(ListeJoueurs[0]) == true){
             //s'il y a égalité
             System.out.println("Félicitation" + joueurCourant.nom + " Vous avez gagné");
+            grilleJeu.viderGrille();
         }
         else {
             if (joueurCourant == ListeJoueurs[0]) {
@@ -346,6 +348,7 @@ public class Partie {
                     joueurCourant = ListeJoueurs[0];
                 }
             System.out.println("Félicitation" + joueurCourant.nom + " Vous avez gagné");
+            grilleJeu.viderGrille();
         }
         
     }
