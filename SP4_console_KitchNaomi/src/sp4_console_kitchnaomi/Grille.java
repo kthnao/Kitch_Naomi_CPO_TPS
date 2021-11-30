@@ -53,18 +53,18 @@ public class Grille {
     }
 
     public boolean etreRemplie() {//renvoie vrai si la grille est pleine
-        boolean res = true;
+
         for (int i = 0; i < 6; i++) { //Pour tout i allant de 0 à 5
             for (int j = 0; j < 7; j++) { //Pour tout j allant de 0 à 6
                 if (CellulesJeu[i][j].JetonCourant == null) { //s'il n' y pas de jeton
-                    res = false; //alors la grille n'est pas remplie donc on renvoie faux
-                    break;
+                    return false; //alors la grille n'est pas remplie donc on renvoie faux
+
                 }
-                break;
+
             }
-            break;
+
         }
-        return res;//sinon on renvoie vrai
+        return true;//sinon on renvoie vrai
     }
 
     public void viderGrille() {//vide la grille
@@ -132,57 +132,55 @@ public class Grille {
         return res;
     }
 
+    
     public boolean etreGagnantePourJoueur(Joueur A) {
         //renvoie vrai si la grille est gagnante pour le joueur passé en paramètre,
         //c’est-à-dire que 4 pions de sa couleur sont alignés en ligne, en colonne ou en diagonale.
         boolean res = false;
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (celluleOccupee(i, j) && celluleOccupee(i, j + 1) && celluleOccupee(i, j + 2) && celluleOccupee(i, j + 3) == true) {
-                    if (CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i][j + 1].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i][j + 2].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i][j + 3].JetonCourant.couleur) {
-                        res = true;
-//vérifie s'il y a 4 jetons alignés sur une ligne
-                    }
-                }
-            }
+        for (int i=0; i<6 ;i++){
+          for(int j=0;j<4;j++){
+              if(celluleOccupee(i,j)&&celluleOccupee(i,j+1)&&celluleOccupee(i,j+2)&&celluleOccupee(i,j+3)==true){
+               if (CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i][j+1].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i][j+2].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i][j+3].JetonCourant.couleur){
+                    res=true; //vérifie s'il y a 4 jetons alignés sur une ligne
+                          
+              }
+              }
+          } 
         }
-        for (int j = 0; j < 7; j++) {
-            for (int i = 0; i < 3; i++) {
-                if (celluleOccupee(i, j) && celluleOccupee(i + 1, j) && celluleOccupee(i + 2, j) && celluleOccupee(i + 3, j) == true) {
-                    if (CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i + 1][j].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i + 2][j].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i + 3][j].JetonCourant.couleur) {
-                        res = true;
-                    }
-                }
-            }
+        for(int j=0;j<7;j++){
+          for(int i=0; i<3 ;i++){
+             if(celluleOccupee(i,j)&&celluleOccupee(i+1,j)&&celluleOccupee(i+2,j)&&celluleOccupee(i+3,j)==true){
+              if (CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i+1][j].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i+2][j].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i+3][j].JetonCourant.couleur){
+                  res=true;//vérifie s'il y a 4 jetons alignés sur une colonne
+              }            
+              }
+          } 
         }
-       //vérifie s'il y a 4 jetons alignés sur une colonne
-       
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (celluleOccupee(i, j) && celluleOccupee(i + 1, j + 1) && celluleOccupee(i + 2, j + 2) && celluleOccupee(i + 3, j + 3) == true) {
-
-                    if (CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i + 1][j + 1].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i + 2][j + 2].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i + 3][j + 3].JetonCourant.couleur) {
-                        res = true;
-                        //vérifie s'il y a 4 jetons alignés sur diagonale
-                    }
-                }
-            }
+        for (int i=0; i<3 ;i++){
+          for(int j=0;j<4;j++){
+              if(celluleOccupee(i,j)&&celluleOccupee(i+1,j+1)&&celluleOccupee(i+2,j+2)&&celluleOccupee(i+3,j+3)==true){
+              
+              if (CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i+1][j+1].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i+2][j+2].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i+3][j+3].JetonCourant.couleur){
+                  res=true;//vérifie s'il y a 4 jetons alignés sur une diagonale
+              }           
+              }
+          } 
         }
-         
-        for (int i = 3; i < 6; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (celluleOccupee(i, j) && celluleOccupee(i - 1, j + 1) && celluleOccupee(i - 2, j + 2) && celluleOccupee(i - 3, j + 3) == true) {
-
-                    if (CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i - 1][j + 1].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i - 2][j + 2].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur == CellulesJeu[i - 3][j + 3].JetonCourant.couleur) {
-                        res = true;
-                         //vérifie s'il y a 4 jetons alignés sur  l'autre diagonale
-                    }
-                }
-            }
+        for (int i=3; i<6 ;i++){
+          for(int j=0;j<4;j++){
+              if(celluleOccupee(i,j)&&celluleOccupee(i-1,j+1)&&celluleOccupee(i-2,j+2)&&celluleOccupee(i-3,j+3)==true){
+              
+              if (CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i-1][j+1].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i-2][j+2].JetonCourant.couleur && CellulesJeu[i][j].JetonCourant.couleur==CellulesJeu[i-3][j+3].JetonCourant.couleur){
+                  res=true;//vérifie s'il y a 4 jetons alignés sur une autre diagonale
+              }           
+              }
+          } 
         }
-
+        
         return res;
     }
+
+
 
     public boolean colonneRemplie(int colonne) {
         int j = colonne;
