@@ -184,9 +184,19 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         getContentPane().add(panneau_info_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 290, 230));
 
         btn_col_0.setText("1");
+        btn_col_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_col_0ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_col_0, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         btn_col_1.setText("2");
+        btn_col_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_col_1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_col_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
         btn_col_2.setText("3");
@@ -246,25 +256,68 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     }//GEN-LAST:event_nom_joueur2ActionPerformed
 
     private void btn_col_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_6ActionPerformed
-        // TODO add your handling code here:
+        jouerDansColonne(6);
+        joueurSuivant();
+        
     }//GEN-LAST:event_btn_col_6ActionPerformed
 
     private void btn_col_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_3ActionPerformed
-        // TODO add your handling code here:
+        jouerDansColonne(3);
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_3ActionPerformed
 
     private void btn_col_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_4ActionPerformed
-        // TODO add your handling code here:
+        jouerDansColonne(4);
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_4ActionPerformed
 
     private void btn_col_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_5ActionPerformed
-        // TODO add your handling code here:
+       jouerDansColonne(5);
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_5ActionPerformed
 
     private void btn_col_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_2ActionPerformed
-        // TODO add your handling code here:
+        jouerDansColonne(2);
+        joueurSuivant();
     }//GEN-LAST:event_btn_col_2ActionPerformed
 
+    private void btn_col_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_0ActionPerformed
+        jouerDansColonne(0);
+        joueurSuivant();
+    }//GEN-LAST:event_btn_col_0ActionPerformed
+
+    private void btn_col_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_1ActionPerformed
+        jouerDansColonne(1);
+        joueurSuivant();
+    }//GEN-LAST:event_btn_col_1ActionPerformed
+
+    public boolean jouerDansColonne(int indice_colonne){
+        
+        boolean resultatAction;
+        
+        resultatAction=grilleJeu.ajouterJetonDansColonne(joueurCourant, indice_colonne);
+        panneau_grille.repaint();//on actualise la grille de jeu
+        if (resultatAction==true){
+           return true; 
+        }
+        else{
+            return false;
+        } 
+        
+        
+    }
+    
+    
+    public void joueurSuivant(){ //fonction qui permet d'alterner le joueur courant entre J1 et J2
+        if(joueurCourant==ListeJoueurs[0]){
+            joueurCourant=ListeJoueurs[1];
+        }
+        else {
+            joueurCourant=ListeJoueurs[0];   
+        }
+        lbl_jcourant.setText(joueurCourant.nom);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -413,7 +466,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             J1.nombreJetonsRestants++;
             J2.nombreJetonsRestants++;
             
-         grilleJeu.afficherGrilleSurConsole();
+         //grilleJeu.afficherGrilleSurConsole();
         }
        
 
