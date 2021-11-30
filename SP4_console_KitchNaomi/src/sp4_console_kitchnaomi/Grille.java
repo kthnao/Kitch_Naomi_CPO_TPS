@@ -186,9 +186,9 @@ public class Grille {
 
     public boolean colonneRemplie(int colonne) {
         int j = colonne;
-        boolean res = false;
+        boolean res = true;
         for (int i = 0; i < 6; i++) {
-            if (CellulesJeu[i][j].JetonCourant != null) { //s'il y a la présence d'un jeton alors la colonne n'est pas remplie
+            if (CellulesJeu[i][j].JetonCourant == null) { //s'il y a pas la présence d'un jeton alors la colonne n'est pas remplie
                 res = false;
             }
         }
