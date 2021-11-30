@@ -121,7 +121,8 @@ public class Cellule {
          //supprime le désintégrateur présent de la cellule, et renvoie vrai,
          //ou faux sinon (exemple : pas de désintégrateur présent)
          if(desintegrateur==true){
-            desintegrateur=false;//on supprime le désintégrateur présent
+            desintegrateur=false;
+            System.out.println("Vous avez gagné un désintégrateur");//on supprime le désintégrateur présent
             return true;
         }
         else{
