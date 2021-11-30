@@ -39,12 +39,13 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                             textemsg.setText("Le joueur " + joueurCourant.nom + " récupère un de ses jetons");
                             Jeton jrecup = c.recupererJeton(); //on récupère le jeton en question
                             joueurCourant.recevoirJeton(jrecup); //on le donne au joueur
-                            c.JetonCourant=null;//on enleve le jeton de la grille
+                            c.JetonCourant=null;//on enleve le jeton de la grille (j'ai une méthode dans grille qui enlève le jeton cependant il demande la ligne et la colonne en entrée et je ne les ai pas j'ai donc enlevé le jeton comme ça
                             joueurSuivant(); //on change de joueur
                         } else {//sinon
                             if (joueurCourant.nombreDesintegrateurs > 0) { //si le joueur a au moins 1 désintégrateur
                                 textemsg.setText("Le joueur " + joueurCourant.nom + " veut désintégrer un de ses jetons");
-                                c.supprimerJeton(); //on supprime le jeton voulu
+                                //c.supprimerJeton(); //je n'ai pas utiliser la méthode supprimer jeton car elle ne marchait pas je ne sais pas pourquoi
+                                c.JetonCourant=null;//on supprime le jeton voulu
                                 joueurCourant.nombreDesintegrateurs--;//on enlève un désintégrateur au joueur
                             } else {
                                 return; //c'est à dire qu'on ne fait aucune action
