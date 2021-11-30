@@ -288,7 +288,7 @@ public class Partie {
                 //On récupère ce jeton et on le supprime de la grille
                 joueurCourant.recevoirJeton(j);
                 //On ajoute ce jeton à la liste des jetons du joueur
-                grilleJeu.tasserGrille(colonne);
+                grilleJeu.tasserColonne(colonne);
                 grilleJeu.afficherGrilleSurConsole();
                 joueurCourant.nombreJetonsRestants++;
 
@@ -322,10 +322,10 @@ public class Partie {
 
                 System.out.println("vous avez saisi les coordonnées: " + ligne + "(ligne)" + colonne + "(colonne)");
                 grilleJeu.supprimerJeton(ligne, colonne); //On supprime le jeton voulu
-                grilleJeu.tasserGrille(colonne);
+                grilleJeu.tasserColonne(colonne);
 
                 joueurCourant.nombreDesintegrateurs--; //Le joueur à un désintégrateur en moins
-                grilleJeu.tasserGrille(colonne);
+                grilleJeu.tasserColonne(colonne);
                 grilleJeu.afficherGrilleSurConsole();
                 
                 

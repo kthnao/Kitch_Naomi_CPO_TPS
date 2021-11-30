@@ -21,6 +21,12 @@ public class Grille {
         }
     }
 
+    public void tasserGrille(){
+        for(int i=0;i<7;i++){
+            tasserColonne(i);
+        }
+    }
+        
     public boolean ajouterJetonDansColonne(Joueur joueurCourant, int colonne) {
         //ajoute le jeton dans la colonne ciblée, sur la cellule vide la plus basse.
         //Renvoie faux si la colonne était pleine.
@@ -196,18 +202,89 @@ public class Grille {
 
         return res;
     }
+    
+    /*    public boolean etreGagnantePourJoueur(Joueur joueur){  //Teste si la grille est gagnante pour un Joueur donné
+        int val=0;
+        int i;
+        int j;
+        for(i=0;i<6;i++){  //Pour toutes les lignes
+            if (val==1){  //Si une combinaison a été concluante on peut break, car la grill est déjà gagnante
+                break;
+            }
+            for(j=0;j<4;j++){  //On teste si on a 4 jetons de suite sur 1a ligne
+                if (celluleOccupee(i, j)&&celluleOccupee(i, j+1)&&celluleOccupee(i, j+2)&&celluleOccupee(i, j+3)==true){  //On doit d'abord tester que toutes les cellules sont bien occupées sinon on a une erreur car on essaye de comparer un null
+                    if (CellulesJeu[i][j].JetonCourant.couleur==joueur.couleur && CellulesJeu[i][j+1].JetonCourant.couleur==joueur.couleur && CellulesJeu[i][j+2].JetonCourant.couleur==joueur.couleur && CellulesJeu[i][j+3].JetonCourant.couleur==joueur.couleur){
+                        val=1; //C'est un test pour éviter de continuer à tester de combinaisons gagnantes si une a déjà été trouvée
+                        break;
+                    }
+                }
+            }
+        }
+        
+        //On teste si on a 4 jetons de suite sur 1a colonne
+        for(i=0;i<3;i++){
+            if (val==1){
+                break;
+            }
+            for(j=0;j<7;j++){ 
+                if (celluleOccupee(i, j)&&celluleOccupee(i+1, j)&&celluleOccupee(i+2, j)&&celluleOccupee(i+3, j)==true){
+                    if (CellulesJeu[i][j].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+1][j].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+2][j].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+3][j].JetonCourant.couleur==joueur.couleur){
+                        val=1; 
+                        break;
+                    }
+                }
+            }
+        }
+        
+        //On teste si on a 4 jetons de suite sur 1a diagonale ascendante
+        for(i=0;i<3;i++){
+            if (val==1){
+                break;
+            }
+            for(j=0;j<4;j++){
+                if (celluleOccupee(i, j)&&celluleOccupee(i+1, j+1)&&celluleOccupee(i+2, j+2)&&celluleOccupee(i+3, j+3)==true){
+                    if (CellulesJeu[i][j].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+1][j+1].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+2][j+2].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+3][j+3].JetonCourant.couleur==joueur.couleur){
+                        val=1;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        //On teste si on a 4 jetons de suite sur 1a diagonale descendante
+        for(i=0;i<3;i++){
+            if (val==1){
+                break;
+            }
+            for(j=6;j>2;j--){ //Il faut faire attention à décroitre les colonne plutot qu'augmenter
+                if (celluleOccupee(i, j)&&celluleOccupee(i+1, j-1)&&celluleOccupee(i+2, j-2)&&celluleOccupee(i+3, j-3)==true){
+                    if (CellulesJeu[i][j].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+1][j-1].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+2][j-2].JetonCourant.couleur==joueur.couleur && CellulesJeu[i+3][j-3].JetonCourant.couleur==joueur.couleur){
+                        val=1;
+                        break;
+                    }
+                }
+            }
+        }
+        if (val==1){ //Si grille gagnante
+            return true;
+        }
+        else{ //sinon
+            return false;
+        }
+    }*/
 
     public boolean colonneRemplie(int colonne) {
-        int j = colonne;
-        boolean res = false;
+        
+        boolean res = true;
         for (int i = 0; i < 6; i++) {
-            if (CellulesJeu[i][j].JetonCourant != null) {
+            if (CellulesJeu[i][colonne].JetonCourant == null) {
                 res = false;
             }
         }
         return res;
 //renvoie vrai si la colonne est remplie (on ne peut y jouer un Jeton)
     }
+
 
     public boolean placerTrouNoir(int ligne, int colonne) {
         //ajoute un trou noir à l’endroit indiqué et retourne vrai si l’ajout 
@@ -220,10 +297,10 @@ public class Grille {
         }
     }
 
-    public void tasserGrille(int colonne) {
+    public void tasserColonne(int colonne) {
         //lorsqu’un jeton est capturé ou détruit, tasse la grille en décalant de une 
         //ligne les jetons situés au dessus de la cellule libérée. 
-        int j = colonne - 1;
+        int j = colonne ;
         for (int i = 0; i < 5; i++) {
             if (CellulesJeu[i][j].JetonCourant == null) {
                 CellulesJeu[i][j].JetonCourant = CellulesJeu[i + 1][j].JetonCourant;
