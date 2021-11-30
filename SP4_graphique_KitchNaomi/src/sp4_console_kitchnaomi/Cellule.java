@@ -124,6 +124,7 @@ public class Cellule {
          //ou faux sinon (exemple : pas de désintégrateur présent)
          if(desintegrateur==true){
             desintegrateur=false;
+            System.out.println("Vous avez gagné un désintégrateur");
             return true;
         }
         else{

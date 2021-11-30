@@ -289,6 +289,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void btn_col_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_col_1ActionPerformed
         jouerDansColonne(1);
         joueurSuivant();
+        
     }//GEN-LAST:event_btn_col_1ActionPerformed
 
     public boolean jouerDansColonne(int indice_colonne){
@@ -359,15 +360,15 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         int nb;
         nb = random.nextInt(2);
         if (nb == 0) { //si nb=0
-            ListeJoueurs[0].couleur = "jaune";
+            ListeJoueurs[0].couleur = "Jaune";
             //joueur1 est associé  à la couleur jaune
-            ListeJoueurs[1].couleur = "rouge";
+            ListeJoueurs[1].couleur = "Rouge";
             //joueur2 est associé  à la couleur rouge
         }
         if (nb == 1) {
-            ListeJoueurs[0].couleur = "rouge";
+            ListeJoueurs[0].couleur = "Rouge";
             //joueur1 est associé  à la couleur rouge
-            ListeJoueurs[1].couleur = "jaune";
+            ListeJoueurs[1].couleur = "Jaune";
             //joueur2 est associé  à la couleur jaune
         }
     }
@@ -447,10 +448,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         int nb;
         nb = random.nextInt(2); //nb prend une valeur aléatoire 0 ou 1
         if (nb == 0) {
-            c = "rouge"; //c prrend la valeur "rouge" si nb=0
+            c = "Rouge"; //c prrend la valeur "rouge" si nb=0
         }
         if (nb == 1) {
-            c = "jaune";//c prrend la valeur "rouge" si nb=1
+            c = "Jaune";//c prrend la valeur "rouge" si nb=1
         }
         if (J2.couleur == c) { //si la couleur du joueur 2 est la même que c alors il commence à jouer
             joueurCourant = J2;

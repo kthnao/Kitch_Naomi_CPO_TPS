@@ -215,7 +215,7 @@ public class Partie {
                     joueurCourant.nombreDesintegrateurs++; //Le joueur gagne donc 1 désintégrateur en plus
                 }  
 
-                while (grilleJeu.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.nombreJetonsRestants - 1], colonne) == false) {
+                while (grilleJeu.ajouterJetonDansColonne(joueurCourant, colonne) == false) {
                     //tant que le jeton n'a pas été correctement ajouté dans la grille, le joueur doit choisir une autre colonne
                     System.out.println("La colonne choisi est soit remplie ou soit inexistante" + "\nChoisissez à nouveau le numéro de la colonne souhaitée");
                     colonne = sc.nextInt();
