@@ -10,6 +10,13 @@ package miniprojet_kitchnaomi;
  * @author naomi
  */
 public class Combinaison {
-    Pion [] Combinaison=new Pion[4];
+    Pion [] tabcombi=new Pion[4];//Combinaison correspond à un tableau composé de 4 pions
     
+    public Combinaison(){//contrusteur de la classe 
+        for (int i=0; i<3;i++){
+            
+                tabcombi[i]=null; //composé de 4 pions avec aucune couleur de base
+            
+        }
+    }
 }

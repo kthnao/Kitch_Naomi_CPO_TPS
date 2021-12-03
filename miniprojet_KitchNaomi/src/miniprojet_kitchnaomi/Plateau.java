@@ -10,12 +10,12 @@ package miniprojet_kitchnaomi;
  * @author naomi
  */
 public class Plateau {
-    Cellule [][] CellulesPlateau=new Cellule[12][4];
+    Pion [][] CellulesPlateau=new Pion[12][4];
     
     public Plateau(){//contrusteur de la classe 
         for (int i=0; i<12;i++){
             for(int j=0; j<4; j++){
-                CellulesPlateau[i][j]=new Cellule(); //12 lignes et 4 colonnes
+                CellulesPlateau[i][j]=new Pion("vide"); //12 lignes et 4 colonnes de pion d'aucune couleur
             }
         }
     }

@@ -12,6 +12,13 @@ package miniprojet_kitchnaomi;
 public class Joueur {
     String nom;
     int EssaiesRestants;
+    Pion pionR=new Pion("rouge");
+    Pion pionV=new Pion("vert");
+    Pion pionJ=new Pion("jaune");
+    Pion pionO=new Pion("orange");
+    Pion pionB=new Pion("bleu");
+    Pion pionM=new Pion("mauve");
+    
   
     
 public Joueur(String unNom) { //constructeur initialisant le nom du joueur avec son paramètre
