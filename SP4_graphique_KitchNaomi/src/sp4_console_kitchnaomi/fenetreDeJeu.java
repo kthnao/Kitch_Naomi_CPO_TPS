@@ -58,17 +58,21 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
                         if (vicj1 && !vicj2) { //si j1 gagne mais pas j2
                             textemsg.setText("Victoire de " + ListeJoueurs[0].nom);
+                            //affichage d'un message de victoire dans le panneau info partie
                         }
 
                         if (vicj2 && !vicj1) {//si j2 gagne mais pas j1
                             textemsg.setText("Victoire de " + ListeJoueurs[1].nom);
+                            //affichage d'un message de victoire dans le panneau info partie
                         }
 
                         if (vicj1 && vicj2) { //si les 2 joueurs gagnent
                             if (joueurCourant == ListeJoueurs[0]) {
                                 textemsg.setText("Victoire de " + ListeJoueurs[1].nom + " (faute de jeu de l'autre joueur)");
+                                //affichage d'un message de victoire dans le panneau info partie
                             } else {
                                 textemsg.setText("Victoire de " + ListeJoueurs[0].nom + " (faute de jeu de l'autre joueur)");
+                                //affichage d'un message de victoire dans le panneau info partie
                             }
                         }
 
