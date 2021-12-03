@@ -9,14 +9,9 @@ package miniprojet_kitchnaomi;
  *
  * @author naomi
  */
-public class Joueur {
-    String nom;
-    int EssaiesRestants;
-  
-    
-public Joueur(String unNom) { //constructeur initialisant le nom du joueur avec son paramètre
-nom = unNom;
-EssaiesRestants=12;
-}
+public class Partie {
+    Plateau PlateauJeu; //Le plateau de la partie
+    Joueur joueurCourant;//Joueur qui joue à la partie
+    Combinaison Combimystere;//Combinaison mystérieuse que le joueur doit deviner
     
 }

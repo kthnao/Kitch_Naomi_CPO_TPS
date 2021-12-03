@@ -9,14 +9,7 @@ package miniprojet_kitchnaomi;
  *
  * @author naomi
  */
-public class Joueur {
-    String nom;
-    int EssaiesRestants;
-  
-    
-public Joueur(String unNom) { //constructeur initialisant le nom du joueur avec son paramètre
-nom = unNom;
-EssaiesRestants=12;
-}
+public class Combinaison {
+    Pion [] Combinaison=new Pion[4];
     
 }

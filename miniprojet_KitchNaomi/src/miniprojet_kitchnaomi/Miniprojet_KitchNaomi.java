@@ -16,6 +16,8 @@ public class Miniprojet_KitchNaomi {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        /*idée d'ajout d'option : ajout de couleur, aggrandir le plateau(la grille), 
+choisir le nombre d'essaies...*/
     }
     
 }
