@@ -9,14 +9,19 @@ package miniprojet_kitchnaomi;
  *
  * @author naomi
  */
-public class Combinaison {
-    Pion [] tabcombi=new Pion[4];//Combinaison correspond à un tableau composé de 4 pions
+public class Languette {
     
-    public Combinaison(){//contrusteur de la classe 
+    Pion [] tablang=new Pion[4];
+    String couleurlang;//peut être rouge ou blanche
+    
+    public Languette(){//contrusteur de la classe 
         for (int i=0; i<3;i++){
             
-                tabcombi[i]=null; //composé de 4 cases vides
+                tablang[i]=null; //composé de 4 cases vides
+  
             
         }
     }
+    
+    
 }
