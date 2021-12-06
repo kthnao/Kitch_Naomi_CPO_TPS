@@ -20,6 +20,8 @@ public Joueur(String unNom) { //constructeur initialisant le nom du joueur avec 
 nom = unNom;
 EssaiesRestants=12;
 }
+
+    
  
 
 }

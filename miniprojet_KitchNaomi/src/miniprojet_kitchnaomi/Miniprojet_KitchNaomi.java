@@ -18,6 +18,9 @@ public class Miniprojet_KitchNaomi {
         // TODO code application logic here
         /*idée d'ajout d'option : ajout de couleur, aggrandir le plateau(la grille), 
 choisir le nombre d'essaies...*/
+        Joueur J1=new Joueur("Nao");
+        Partie test=new Partie(J1);
+        test.debuterpartie();
     }
     
 }

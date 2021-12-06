@@ -14,7 +14,7 @@ import java.util.Random;
 public class Plateau {
 
     Pion[][] CellulesPlateau = new Pion[12][4];
-    Combinaison Combimystere;//Combinaison mystérieuse que le joueur doit deviner 
+    Combinaison Combimystere = new Combinaison();//Combinaison mystérieuse que le joueur doit deviner 
     Languette langbonnecouleur = new Languette();//Languette correspondant aux nb de pions de bonne couleur
     Languette langbonnecetp = new Languette();//Languette correspondant aux nb de pions de bonne couleur et bonne position
     Pion pionR = new Pion("rouge");
@@ -23,6 +23,8 @@ public class Plateau {
     Pion pionO = new Pion("orange");
     Pion pionB = new Pion("bleu");
     Pion pionM = new Pion("mauve");
+    Pion pionBlc = new Pion("blanc");
+    Pion pionF= new Pion("fuschia");
 
     public Plateau() {//contrusteur de la classe 
         for (int i = 0; i < 12; i++) {
@@ -38,7 +40,7 @@ public class Plateau {
         int cpion;//correspondra à la couleur du pion
 
         for (int i = 0; i < 4; i++) {
-            cpion = random.nextInt(6);//prend une valeur comprise entre 0 et 5
+            cpion = random.nextInt(8);//prend une valeur comprise entre 0 et 7
 
             Pion pioncombi = new Pion("vide"); //On créer une varaible qui me permettra de remplir le tableau de la ocmbinaison
             switch (cpion) {
@@ -72,6 +74,17 @@ public class Plateau {
                     Pion pionM = new Pion("mauve");
                     pioncombi = pionM;
                     break;
+                case 6:
+                    //si cpion==4 alors le pioncombi prend la valeur d'un pion jaune
+                    Pion pionBlc = new Pion("blanc");
+                    pioncombi = pionBlc;
+                    break;
+                case 7:
+                    //si cpion==5 alors le pioncombi prend la valeur d'un pion mauve
+                    Pion pionF = new Pion("fuschia");
+                    pioncombi = pionF;
+                    break;   
+              
             }
             Combimystere.tabcombi[i] = pioncombi; 
 //La valeur de la case du tableau indiquée prend comme référence celle du pion combi
@@ -124,6 +137,8 @@ public class Plateau {
                 }
             }
         }
+        
+       
         int[]res=new int[2];
         res[0]=nbbonnecetp;
         res[1]=nbbonnecouleur;
@@ -162,5 +177,5 @@ public class Plateau {
         return combiproposee;
     }
 
-    //méthode proposition combi
+    
 }
