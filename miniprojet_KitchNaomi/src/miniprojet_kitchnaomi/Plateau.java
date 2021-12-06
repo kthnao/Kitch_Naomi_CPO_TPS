@@ -12,26 +12,28 @@ import java.util.Random;
  * @author naomi
  */
 public class Plateau {
-    Pion [][] CellulesPlateau=new Pion[12][4];
-    Combinaison Combimystere;//Combinaison mystérieuse que le joueur doit deviner
-    Pion [] nbbonnecouleur=new Pion[4];//nb de pion de la bonne couleur
-    Pion [] nbbonnecetp=new Pion[4];//nb de pion de la bonne couleur et de la bonne position 
-    Pion pionR=new Pion("rouge");
-    Pion pionV=new Pion("vert");
-    Pion pionJ=new Pion("jaune");
-    Pion pionO=new Pion("orange");
-    Pion pionB=new Pion("bleu");
-    Pion pionM=new Pion("mauve");
-    
-    public Plateau(){//contrusteur de la classe 
-        for (int i=0; i<12;i++){
-            for(int j=0; j<4; j++){
-                CellulesPlateau[i][j]=new Pion("vide"); //12 lignes et 4 colonnes de pion d'aucune couleur
+
+    Pion[][] CellulesPlateau = new Pion[12][4];
+    Combinaison Combimystere;//Combinaison mystérieuse que le joueur doit deviner 
+    Languette langbonnecouleur = new Languette();//Languette correspondant aux nb de pions de bonne couleur
+    Languette langbonnecetp = new Languette();//Languette correspondant aux nb de pions de bonne couleur et bonne position
+    Pion pionR = new Pion("rouge");
+    Pion pionV = new Pion("vert");
+    Pion pionJ = new Pion("jaune");
+    Pion pionO = new Pion("orange");
+    Pion pionB = new Pion("bleu");
+    Pion pionM = new Pion("mauve");
+
+    public Plateau() {//contrusteur de la classe 
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 4; j++) {
+                CellulesPlateau[i][j] = new Pion("vide"); //12 lignes et 4 colonnes de pion d'aucune couleur
             }
         }
     }
-    
-    public void initialisationcombimyst() {
+
+    public Combinaison initialisationcombimyst() {
+        //renvoie une combinaison àléatoire qui sera la combinaison à retrouver
         Random random = new Random();
         int cpion;//correspondra à la couleur du pion
 
@@ -42,7 +44,7 @@ public class Plateau {
             switch (cpion) {
                 case 0:
                     //si cpion==0 alors le pioncombi prend la valeur d'un pion rouge 
-                    Pion pionR = new Pion("rouge"); 
+                    Pion pionR = new Pion("rouge");
                     pioncombi = pionR;
                     break;
                 case 1:
@@ -71,46 +73,94 @@ public class Plateau {
                     pioncombi = pionM;
                     break;
             }
-            Combimystere.tabcombi [i] = pioncombi; //La valeur de la case du tableau indiquée prend comme référence celle du pion combi
-
+            Combimystere.tabcombi[i] = pioncombi; 
+//La valeur de la case du tableau indiquée prend comme référence celle du pion combi
         }
-
+        return Combimystere;
     }
-    
-    public boolean Combigagnante(Combinaison combiproposee){//retourne vrai si le joueur a trouvé la combinaison sinon renvoie faux
-        if (Combimystere.tabcombi==combiproposee.tabcombi){
-            return true;
+
+    public boolean Combigagnante(Combinaison combiproposee) {
+    //retourne vrai si le joueur a trouvé la combinaison sinon renvoie faux
+        int pionscorrects = 0;
+        for (int i = 0; i < 4; i++) {
+            if (Combimystere.tabcombi[i] == combiproposee.tabcombi[i]) {
+                pionscorrects = pionscorrects + 1;
+            }
         }
-        else{
+        if (pionscorrects == 4) {
+            return true;
+        } else {
             return false;
         }
     }
-    
-    public int bonneCouleur(Combinaison combiproposee){
-        //renvoie le nombre de pion qui à la bonne couleur mais pas à la bonne position
-        int nbbonnecouleur=0;
-        for(int i=0; i<4; i++){
-            for(int j=0; j<4; j++){
-                if(Combimystere.tabcombi[i].couleur==combiproposee.tabcombi[j].couleur){
+
+    public int[] comparaisoncombi(Combinaison combiproposee) {
+        //retourne un tableau contenant le nombre de pions à la bonne position et de la bonne couleur dans la première case et 
+        //le nombre de pions de la bonne couleur dans la seconde
+        
+        int nbbonnecetp = 0;//nb de pion de la bonne couleur et de la bonne position
+        int nbbonnecouleur = 0;//nb de pion de la bonne couleur
+        boolean[] checkcombimyst = new boolean[4];
+        boolean[] checkcombiproposee = new boolean[4];
+        for (int k = 0; k < 4; k++) {
+            checkcombimyst[k] = false; //On initialise notre tableau qu'avec la valeur false
+            checkcombiproposee[k] = false;//On initialise notre tableau qu'avec la valeur false
+        }
+        for (int i = 0; i < 4; i++) { 
+//si les cases des combi sont identiques alors le pion est à la bonne position et est de la bonne couleur
+            if (Combimystere.tabcombi[i] == combiproposee.tabcombi[i]) {
+                nbbonnecetp = nbbonnecetp + 1;
+                checkcombimyst[i] = true;
+                checkcombiproposee[i] = true;
+            }
+        }
+        for(int j=0;j<4;j++){
+            for(int x=0;x<4;x++){
+                if(Combimystere.tabcombi[j] == combiproposee.tabcombi[x]&&checkcombimyst[j]==false&&checkcombiproposee[x] ==false){
+//si des cases de positions ont la même valeur et n'ont pas été déjà check alors cela veut dire que le pion est de la bonne couleur mais pas à la bonne posiiton
                     nbbonnecouleur=nbbonnecouleur+1;
+                    checkcombimyst[j] = true;
+                    checkcombiproposee[x] = true;
                 }
             }
         }
-        return nbbonnecouleur;
+        int[]res=new int[2];
+        res[0]=nbbonnecetp;
+        res[1]=nbbonnecouleur;
+        return res;
     }
-    
-    public int bonneCouleuretPosition(Combinaison combiproposee){
-        //renvoie le nombre de pion qui à la bonne couleur mais pas à la bonne position
-        int nbbonnecouleuretposition=0;
-        for(int i=0; i<4; i++){
-            for(int j=0; j<4; j++){
-                if(Combimystere.tabcombi[i]==combiproposee.tabcombi[j]){
-                    nbbonnecouleuretposition=nbbonnecouleuretposition+1;
-                }
-            }
+
+  
+    public Languette affichagelangbonnecouleur(int nbbonnecouleur) {
+        //Remplie de pion blanc le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
+        Pion pionBl = new Pion("blanc");
+        for (int i = 0; i < nbbonnecouleur; i++) {
+            langbonnecouleur.tablang[i] = pionBl;
+            langbonnecouleur.couleurlang = pionBl.couleur;//la couleur de la languette correspond à la couleur des pions
         }
-        return nbbonnecouleuretposition;
+        return langbonnecouleur;
     }
-    //méthode s'il y a une bonne couleur
-    //méthode s'il y a bonne couleur et bonne combinaison
+
+    public Languette affichagelangbonnecetp(int nbbonnecetp) {
+        //Remplie de pion reouge le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
+        Pion pionrouge = new Pion("rouge");
+        for (int i = 0; i < nbbonnecetp; i++) {
+            langbonnecetp.tablang[i] = pionrouge;
+        }
+        langbonnecetp.couleurlang = pionrouge.couleur;//la couleur de la languette correspond à la couleur des pions
+        return langbonnecetp;
+    }
+
+    public Combinaison combiproposee(Pion pion1, Pion pion2, Pion pion3, Pion pion4) {
+        //renvoie la combinaison composée des pions en entré dans l'ordre donné en entrée aussi
+        Combinaison combiproposee=new Combinaison();
+        combiproposee.tabcombi[0]=pion1;
+        combiproposee.tabcombi[1]=pion2;
+        combiproposee.tabcombi[2]=pion3;
+        combiproposee.tabcombi[3]=pion4;
+        
+        return combiproposee;
+    }
+
+    //méthode proposition combi
 }

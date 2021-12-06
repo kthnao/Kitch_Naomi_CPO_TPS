@@ -5,7 +5,6 @@
  */
 package miniprojet_kitchnaomi;
 
-import java.util.Random;
 
 /**
  *
@@ -17,11 +16,10 @@ public class Partie {
     Joueur joueurCourant;//Joueur qui joue à la partie
     
 
-    
-    
+   
     public void initialisationpartie(){
         PlateauJeu = new Plateau();
-        
+        Combinaison combiMyst=PlateauJeu.initialisationcombimyst();
         
     }
 }
