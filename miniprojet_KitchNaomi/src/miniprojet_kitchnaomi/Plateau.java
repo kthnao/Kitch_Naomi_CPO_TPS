@@ -96,7 +96,7 @@ public class Plateau {
     //retourne vrai si le joueur a trouvé la combinaison sinon renvoie faux
         int pionscorrects = 0;
         for (int i = 0; i < 4; i++) {
-            if (Combimystere.tabcombi[i] == combiproposee.tabcombi[i]) {
+            if (Combimystere.tabcombi[i].lireCouleur() == combiproposee.tabcombi[i].lireCouleur()) {
                 pionscorrects = pionscorrects + 1;
             }
         }
@@ -121,7 +121,7 @@ public class Plateau {
         }
         for (int i = 0; i < 4; i++) { 
 //si les cases des combi sont identiques alors le pion est à la bonne position et est de la bonne couleur
-            if (Combimystere.tabcombi[i] == combiproposee.tabcombi[i]) {
+            if (Combimystere.tabcombi[i].lireCouleur() == combiproposee.tabcombi[i].lireCouleur()) {
                 nbbonnecetp = nbbonnecetp + 1;
                 checkcombimyst[i] = true;
                 checkcombiproposee[i] = true;
@@ -129,7 +129,7 @@ public class Plateau {
         }
         for(int j=0;j<4;j++){
             for(int x=0;x<4;x++){
-                if(Combimystere.tabcombi[j] == combiproposee.tabcombi[x]&&checkcombimyst[j]==false&&checkcombiproposee[x] ==false){
+                if(Combimystere.tabcombi[j].lireCouleur() == combiproposee.tabcombi[x].lireCouleur()&&checkcombimyst[j]==false&&checkcombiproposee[x] ==false){
 //si des cases de positions ont la même valeur et n'ont pas été déjà check alors cela veut dire que le pion est de la bonne couleur mais pas à la bonne posiiton
                     nbbonnecouleur=nbbonnecouleur+1;
                     checkcombimyst[j] = true;

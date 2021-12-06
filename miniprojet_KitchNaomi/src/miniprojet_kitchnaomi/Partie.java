@@ -26,7 +26,7 @@ public class Partie {
         Combinaison combiMyst = PlateauJeu.initialisationcombimyst();
         Combinaison combiProposee=new Combinaison();
         for(int k=0;k<4;k++){
-        System.out.println("Choisissez la couleur d'un pion de votre combinaison : 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour mauve" + "\n 4 pour orange" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour fuschia" + "\n 8 pour blanc");
+        System.out.println("Choisissez la couleur d'un pion de votre combinaison :"+ "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour mauve" + "\n 4 pour orange" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour fuschia" + "\n 8 pour blanc");
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt(); //On demande au joueur son choix
         String cpion = null;//on initialise la couleur du pion choisi
@@ -72,10 +72,11 @@ public class Partie {
             Languette langRouge = PlateauJeu.affichagelangbonnecetp(nbpionbonnecetp);
             Languette langBlanche = PlateauJeu.affichagelangbonnecouleur(nbpionbonnecouleur);
             
-            System.out.println("Vous avez "+nbpionbonnecetp+" pions bien placés et de bonne couleur et "+nbpionbonnecouleur+" pions de bonne couleur mais mal positionnés");
+            System.out.println("Vous avez "+nbpionbonnecetp+" pion(s) bien placé(s) et de bonne couleur et "+nbpionbonnecouleur+" pion(s) de bonne couleur mais mal positionné(s)");
             joueurCourant.EssaiesRestants--;
+            System.out.println("il vous reste "+joueurCourant.EssaiesRestants+" essaies restants");
             for(int k=0;k<4;k++){
-        System.out.println("Choisissez la couleur d'un pion de votre combinaison : 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour mauve" + "\n 4 pour orange" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour fuschia" + "\n 8 pour blanc");
+        System.out.println("Choisissez la couleur d'un pion de votre combinaison : "+ "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour mauve" + "\n 4 pour orange" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour fuschia" + "\n 8 pour blanc");
         Scanner sc = new Scanner(System.in);
         int choix = sc.nextInt(); //On demande au joueur son choix
         String cpion = null;//on initialise la couleur du pion choisi
