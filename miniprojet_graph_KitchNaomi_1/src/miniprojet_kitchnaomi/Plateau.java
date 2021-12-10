@@ -25,13 +25,20 @@ public class Plateau {
     Pion pionM = new Pion("mauve");
     Pion pionBlc = new Pion("blanc");
     Pion pionF= new Pion("fuschia");
-
+    //String[]tabcouleur=new String[8];
+    
+String[]tabcouleur= {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
+    
     public Plateau() {//contrusteur de la classe 
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 4; j++) {
                 CellulesPlateau[i][j] = new Pion("vide"); //12 lignes et 4 colonnes de pion d'aucune couleur
             }
         }
+       
+        
+        
+        
     }
 
     public Combinaison initialisationcombimyst() {

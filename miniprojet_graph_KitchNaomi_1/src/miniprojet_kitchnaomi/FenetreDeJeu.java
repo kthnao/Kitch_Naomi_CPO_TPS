@@ -14,7 +14,24 @@ public class FenetreDeJeu extends javax.swing.JFrame {
      * Creates new form FenetreDeJeu
      */
     public FenetreDeJeu() {
+        String[]tabcouleur= {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
+
         initComponents();
+
+        for (int i = 11; i >= 0; i--) {
+            for (int j = 0; j < 4; j++) {
+                plateauGraphique pionGraph = new plateauGraphique();
+                Panneau_grilleJeu.add(pionGraph);
+              
+            }
+        }
+        
+            for (int l = 0; l < 8; l++) {
+                couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
+                Panneau_couleur.add(couleurpionGraph);
+              
+            }
+        
     }
 
     /**
@@ -26,18 +43,20 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        Panneau_grilleJeu = new javax.swing.JPanel();
+        Panneau_couleur = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1222, 714));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Panneau_grilleJeu.setBackground(new java.awt.Color(255, 153, 255));
+        Panneau_grilleJeu.setLayout(new java.awt.GridLayout(12, 4));
+        getContentPane().add(Panneau_grilleJeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 592, 704));
+
+        Panneau_couleur.setBackground(new java.awt.Color(0, 255, 255));
+        Panneau_couleur.setLayout(new java.awt.GridLayout(2, 4));
+        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, 380, 150));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,5 +97,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Panneau_couleur;
+    private javax.swing.JPanel Panneau_grilleJeu;
     // End of variables declaration//GEN-END:variables
 }
