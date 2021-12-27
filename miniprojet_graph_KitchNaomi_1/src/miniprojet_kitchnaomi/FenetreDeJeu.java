@@ -4,35 +4,38 @@
  */
 package miniprojet_kitchnaomi;
 
+import java.util.Scanner;
+
 /**
  *
  * @author naomi
  */
 public class FenetreDeJeu extends javax.swing.JFrame {
 
-    String[]tabcouleur= {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
-    Plateau plateauJeu= new Plateau();
+    String[] tabcouleur = {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
+    Plateau plateauJeu = new Plateau();
     Joueur joueur;
-    
+
     public FenetreDeJeu() {
-        
 
         initComponents();
+        panneau_info_joueur.setVisible(false);
+        Panneau_couleur.setVisible(false);
 
         for (int i = 11; i >= 0; i--) {
             for (int j = 0; j < 4; j++) {
                 plateauGraphique pionGraph = new plateauGraphique();
                 Panneau_grilleJeu.add(pionGraph);
-              
+
             }
         }
-        
-            for (int l = 0; l < 8; l++) {
-                couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
-                Panneau_couleur.add(couleurpionGraph);
-              
-            }
-        
+
+        for (int l = 0; l < 8; l++) {
+            couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
+            Panneau_couleur.add(couleurpionGraph);
+
+        }
+
     }
 
     /**
@@ -46,6 +49,16 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         Panneau_grilleJeu = new javax.swing.JPanel();
         Panneau_couleur = new javax.swing.JPanel();
+        panneau_creation_partie = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        nom_joueur = new javax.swing.JTextField();
+        btn_start = new javax.swing.JButton();
+        panneau_info_joueur = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        lbl_j_essaiesrest = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lbl_j_nom = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1222, 714));
@@ -57,10 +70,57 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         Panneau_couleur.setBackground(new java.awt.Color(0, 255, 255));
         Panneau_couleur.setLayout(new java.awt.GridLayout(2, 4));
-        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 300, 120));
+        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 310, 120));
+
+        panneau_creation_partie.setBackground(new java.awt.Color(204, 255, 204));
+        panneau_creation_partie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Nom Joueur : ");
+        panneau_creation_partie.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        panneau_creation_partie.add(nom_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 110, 30));
+
+        btn_start.setText("Démarrer partie");
+        btn_start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_startActionPerformed(evt);
+            }
+        });
+        panneau_creation_partie.add(btn_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 40));
+
+        getContentPane().add(panneau_creation_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 290, 140));
+
+        panneau_info_joueur.setBackground(new java.awt.Color(204, 255, 204));
+        panneau_info_joueur.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel4.setText("infos joueur");
+        panneau_info_joueur.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 10, 130, 30));
+
+        lbl_j_essaiesrest.setText("nbessaierest");
+        panneau_info_joueur.add(lbl_j_essaiesrest, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
+
+        jLabel7.setText("nb essaies restants :");
+        panneau_info_joueur.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 20));
+
+        jLabel8.setText("joueur :");
+        panneau_info_joueur.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+
+        lbl_j_nom.setText("nomjoueur ");
+        panneau_info_joueur.add(lbl_j_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
+
+        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 290, 140));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_startActionPerformed
+        //lorsqu'on active le bouton
+        panneau_info_joueur.setVisible(true);//fait apparaître les infos du joueur
+        Panneau_couleur.setVisible(true);//fait apparaître les couleurs
+        initialiserPartie(); //initialise la partie en appelant la méthode initialiser partie
+        Panneau_grilleJeu.repaint(); //actualise la grille sans qu'on est besoin de passer la souris sur les cases
+        btn_start.setEnabled(false); //le bouton ne peut plus être réutiliser après sa première utilisation
+    }//GEN-LAST:event_btn_startActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,8 +157,30 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         });
     }
 
+    public void initialiserPartie() {
+        String nomjoueur = nom_joueur.getText();
+        Joueur J = new Joueur(nomjoueur);
+        Combinaison combiMyst = plateauJeu.initialisationcombimyst();
+        lbl_j_nom.setText(nomjoueur); //sur la fenêtre le lbl_J1_nom prend comme valeur le pseudo entrer pour le J1
+       
+
+        lbl_j_essaiesrest.setText(J.EssaiesRestants + "");//le lbl_j1_desint affiche le nombre de désintegrateur du joueur1
+        //on rajoute "" pour que ce soit un String car sinon nombreDesintegrateur est un entier et on veut un string
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panneau_couleur;
     private javax.swing.JPanel Panneau_grilleJeu;
+    private javax.swing.JButton btn_start;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lbl_j_essaiesrest;
+    private javax.swing.JLabel lbl_j_nom;
+    private javax.swing.JTextField nom_joueur;
+    private javax.swing.JPanel panneau_creation_partie;
+    private javax.swing.JPanel panneau_info_joueur;
     // End of variables declaration//GEN-END:variables
 }
