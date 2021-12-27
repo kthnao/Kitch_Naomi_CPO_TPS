@@ -25,9 +25,9 @@ public class Plateau {
     Pion pionM = new Pion("mauve");
     Pion pionBlc = new Pion("blanc");
     Pion pionF= new Pion("fuschia");
-    //String[]tabcouleur=new String[8];
     
-String[]tabcouleur= {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
+    
+    //String[]tabcouleur= {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
     
     public Plateau() {//contrusteur de la classe 
         for (int i = 0; i < 12; i++) {

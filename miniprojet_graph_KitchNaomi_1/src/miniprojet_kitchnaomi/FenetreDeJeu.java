@@ -10,11 +10,12 @@ package miniprojet_kitchnaomi;
  */
 public class FenetreDeJeu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FenetreDeJeu
-     */
+    String[]tabcouleur= {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
+    Plateau plateauJeu= new Plateau();
+    Joueur joueur;
+    
     public FenetreDeJeu() {
-        String[]tabcouleur= {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
+        
 
         initComponents();
 
@@ -50,13 +51,13 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1222, 714));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Panneau_grilleJeu.setBackground(new java.awt.Color(255, 153, 255));
+        Panneau_grilleJeu.setBackground(new java.awt.Color(153, 153, 153));
         Panneau_grilleJeu.setLayout(new java.awt.GridLayout(12, 4));
         getContentPane().add(Panneau_grilleJeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 592, 704));
 
         Panneau_couleur.setBackground(new java.awt.Color(0, 255, 255));
         Panneau_couleur.setLayout(new java.awt.GridLayout(2, 4));
-        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, 380, 150));
+        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 300, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

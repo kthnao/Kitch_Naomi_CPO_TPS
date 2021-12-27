@@ -5,6 +5,7 @@
 package miniprojet_kitchnaomi;
 
 
+import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -25,11 +26,47 @@ public class plateauGraphique extends JLabel {
     ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.gif"));
     
     public plateauGraphique () {
-        pionAssocie = new Pion("rouge");
+        pionAssocie = new Pion("vide");
+        this.setHorizontalAlignment(CENTER);
        //this.setText(pionAssocie.couleur);
       
     
     }
-    
+    @Override
+    public void paintComponent(Graphics G) {
+        super.paintComponent(G);
+        String couleur_pion=pionAssocie.lireCouleur();
+        switch (couleur_pion) {
+            case "vide":
+                setIcon(img_vide); //on attribue l'image blank.gif
+                break;
+            case "rouge":
+                setIcon(img_rouge);
+                break;
+                case "fuschia":
+                setIcon(img_fushia);
+                break;
+                case "bleu":
+                setIcon(img_bleu);
+                break;
+                case "blanc":
+                setIcon(img_blanc);
+                break;
+                case "jaune":
+                setIcon(img_jaune);
+                break;
+                case "mauve":
+                setIcon(img_mauve);
+                break;
+                case "vert":
+                setIcon(img_vert);
+                break;
+                case "orange":
+                setIcon(img_orange);
+                break;
+             
+        }
+
+    }
     
 }
