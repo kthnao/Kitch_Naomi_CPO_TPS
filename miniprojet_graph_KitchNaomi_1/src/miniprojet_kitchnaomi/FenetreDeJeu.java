@@ -30,8 +30,10 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     public FenetreDeJeu() {
 
         initComponents();
-        panneau_info_joueur.setVisible(false);
-        Panneau_couleur.setVisible(false);
+        panneau_info_joueur.setVisible(false);//le panneau info joueur n'est pas visible
+        Panneau_couleur.setVisible(false);//le panneau des pions n'est pas visible
+        panneau_combiproposee.setVisible(false);//le panneau combiproposee n'est pas visible
+        decors.setVisible(false);//le panneau avec les 2 boutons (supprimer et valider) nb'est pas visible
 
         for (int i = 11; i >= 0; i--) {
             for (int j = 0; j < 4; j++) {
@@ -44,6 +46,12 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         for (int l = 0; l < 8; l++) {
             couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
             Panneau_couleur.add(couleurpionGraph);
+
+        }
+        
+        for (int k = 0; k < 4; k++) {
+            couleurGraph couleurpionGraph = new couleurGraph("vide");
+            panneau_combiproposee.add(couleurpionGraph);
 
         }
 
@@ -70,6 +78,10 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lbl_j_nom = new javax.swing.JLabel();
+        panneau_combiproposee = new javax.swing.JPanel();
+        decors = new javax.swing.JPanel();
+        btn_suppression = new javax.swing.JButton();
+        btn_validation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1222, 714));
@@ -81,7 +93,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         Panneau_couleur.setBackground(new java.awt.Color(0, 255, 255));
         Panneau_couleur.setLayout(new java.awt.GridLayout(2, 4));
-        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 450, 310, 120));
+        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 310, 120));
 
         panneau_creation_partie.setBackground(new java.awt.Color(204, 255, 204));
         panneau_creation_partie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,6 +133,24 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 290, 140));
 
+        panneau_combiproposee.setBackground(new java.awt.Color(255, 0, 255));
+        getContentPane().add(panneau_combiproposee, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 540, 320, 90));
+
+        decors.setBackground(new java.awt.Color(255, 0, 255));
+
+        btn_suppression.setText("Supprimer");
+        btn_suppression.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suppressionActionPerformed(evt);
+            }
+        });
+        decors.add(btn_suppression);
+
+        btn_validation.setText("Valider");
+        decors.add(btn_validation);
+
+        getContentPane().add(decors, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 630, 320, 50));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,10 +158,16 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         //lorsqu'on active le bouton
         panneau_info_joueur.setVisible(true);//fait apparaître les infos du joueur
         Panneau_couleur.setVisible(true);//fait apparaître les couleurs
+        panneau_combiproposee.setVisible(true);//fait apparaître la combi proposée
+        decors.setVisible(true);//fait apparaitre le panneau avec les 2 boutons (supprimer et valider)
         initialiserPartie(); //initialise la partie en appelant la méthode initialiser partie
         Panneau_grilleJeu.repaint(); //actualise la grille sans qu'on est besoin de passer la souris sur les cases
         btn_start.setEnabled(false); //le bouton ne peut plus être réutiliser après sa première utilisation
     }//GEN-LAST:event_btn_startActionPerformed
+
+    private void btn_suppressionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suppressionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_suppressionActionPerformed
 
     public Combinaison initialisationcombimyst() {
         //renvoie une combinaison àléatoire qui sera la combinaison à retrouver
@@ -326,6 +362,9 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JPanel Panneau_couleur;
     private javax.swing.JPanel Panneau_grilleJeu;
     private javax.swing.JButton btn_start;
+    private javax.swing.JButton btn_suppression;
+    private javax.swing.JButton btn_validation;
+    private javax.swing.JPanel decors;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
@@ -333,6 +372,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_j_essaiesrest;
     private javax.swing.JLabel lbl_j_nom;
     private javax.swing.JTextField nom_joueur;
+    private javax.swing.JPanel panneau_combiproposee;
     private javax.swing.JPanel panneau_creation_partie;
     private javax.swing.JPanel panneau_info_joueur;
     // End of variables declaration//GEN-END:variables
