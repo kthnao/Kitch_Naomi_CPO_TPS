@@ -24,7 +24,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
     String[] tabcouleur = {"rouge", "vert", "jaune", "orange", "bleu", "mauve", "blanc", "fuschia"};
     Plateau plateauJeu = new Plateau();
-    
+    Combinaison combiproposee = new Combinaison();
     Joueur joueur;
 
     public FenetreDeJeu() {
@@ -39,6 +39,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
             for (int j = 0; j < 4; j++) {
                 plateauGraphique pionGraph = new plateauGraphique();
                 Panneau_grilleJeu.add(pionGraph);
+                //permet de créer les panneaux dans le pannel associé, ici c'est le panel Panneau_grilleJeu
 
             }
         }
@@ -46,15 +47,23 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         for (int l = 0; l < 8; l++) {
             couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
             Panneau_couleur.add(couleurpionGraph);
+            couleurpionGraph.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        String couleurpion = couleurpionGraph.couleurAssociee;
+                           Pion pionchoisi=new Pion(couleurpion);
+                    }
+                   
+            });
 
         }
         
         for (int k = 0; k < 4; k++) {
-            couleurGraph couleurpionGraph = new couleurGraph("vide");
-            panneau_combiproposee.add(couleurpionGraph);
+            couleurGraph combiproposeeGraph = new couleurGraph("vide");
+            panneau_combiproposee.add(combiproposeeGraph);
 
         }
-
+        
+        
     }
 
     /**
@@ -89,11 +98,11 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         Panneau_grilleJeu.setBackground(new java.awt.Color(153, 153, 153));
         Panneau_grilleJeu.setLayout(new java.awt.GridLayout(12, 4));
-        getContentPane().add(Panneau_grilleJeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 592, 704));
+        getContentPane().add(Panneau_grilleJeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 700));
 
         Panneau_couleur.setBackground(new java.awt.Color(0, 255, 255));
         Panneau_couleur.setLayout(new java.awt.GridLayout(2, 4));
-        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 310, 120));
+        getContentPane().add(Panneau_couleur, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 380, 310, 120));
 
         panneau_creation_partie.setBackground(new java.awt.Color(204, 255, 204));
         panneau_creation_partie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,7 +119,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         });
         panneau_creation_partie.add(btn_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 40));
 
-        getContentPane().add(panneau_creation_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 290, 140));
+        getContentPane().add(panneau_creation_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 290, 140));
 
         panneau_info_joueur.setBackground(new java.awt.Color(204, 255, 204));
         panneau_info_joueur.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,10 +140,10 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         lbl_j_nom.setText("nomjoueur ");
         panneau_info_joueur.add(lbl_j_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
 
-        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 290, 140));
+        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, 290, 140));
 
         panneau_combiproposee.setBackground(new java.awt.Color(255, 0, 255));
-        getContentPane().add(panneau_combiproposee, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 540, 320, 90));
+        getContentPane().add(panneau_combiproposee, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 540, 320, 90));
 
         decors.setBackground(new java.awt.Color(255, 0, 255));
 
@@ -149,7 +158,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         btn_validation.setText("Valider");
         decors.add(btn_validation);
 
-        getContentPane().add(decors, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 630, 320, 50));
+        getContentPane().add(decors, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 630, 320, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,6 +319,34 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         combiproposee.tabcombi[3]=pion4;
         
         return combiproposee;
+    }
+    
+    public Combinaison suppression(Combinaison combiproposee) {
+        //prend une combianais et supprime le dernier pion du tableau ayant une couleur différente de "vide"
+        
+        if (combiproposee.tabcombi[3].couleur!="vide"){ //si la couleur du pion de la dernière case n'est pas "vide" 
+                                                        //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[3].couleur="vide";
+            return combiproposee;
+        }
+        else if (combiproposee.tabcombi[2].couleur!="vide"){//si la couleur du pion de la dernière case n'est pas "vide" 
+                                                            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[2].couleur="vide";
+            return combiproposee;
+        }
+        else if (combiproposee.tabcombi[1].couleur!="vide"){//si la couleur du pion de la dernière case n'est pas "vide" 
+                                                            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[1].couleur="vide";
+            return combiproposee;
+        }
+        else if (combiproposee.tabcombi[0].couleur!="vide"){//si la couleur du pion de la dernière case n'est pas "vide" 
+                                                             //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[0].couleur="vide";
+            return combiproposee;
+        }
+        
+        return combiproposee; //si toutes les pions ont la couleur "vide" alors on retourne la combinaison 
+        
     }
     /**
      * @param args the command line arguments
