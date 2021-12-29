@@ -11,8 +11,6 @@ package miniprojet_kitchnaomi;
 //il faut mettre la fonction qui remet le bon nb d'essaies restant
 //il faut la fonciyon des languettes et qui dit si c'est bon ou non
 //fonction qui annonce si le joueur à bon ou non => partie gagnante
-
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -35,6 +33,10 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         panneau_combiproposee.setVisible(false);//le panneau combiproposee n'est pas visible
         decors.setVisible(false);//le panneau avec les 2 boutons (supprimer et valider) nb'est pas visible
 
+         for (int y=0; y<4;y++){
+            
+                combiproposee.tabcombi[y]= new Pion("vide");
+         }
         for (int i = 11; i >= 0; i--) {
             for (int j = 0; j < 4; j++) {
                 plateauGraphique pionGraph = new plateauGraphique();
@@ -44,26 +46,39 @@ public class FenetreDeJeu extends javax.swing.JFrame {
             }
         }
 
+        for (int k = 0; k < 4; k++) {
+            //plateauGraphique combiproposeeGraph = new plateauGraphique();
+            //panneau_combiproposee.add(combiproposeeGraph);
+            couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur);
+            panneau_combiproposee.add(combiproposeeGraph);
+
+        }
+
         for (int l = 0; l < 8; l++) {
             couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
             Panneau_couleur.add(couleurpionGraph);
+
             couleurpionGraph.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        String couleurpion = couleurpionGraph.couleurAssociee;
-                           Pion pionchoisi=new Pion(couleurpion);
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                    for (int x = 0; x < 4; x++) {
+                        if(combiproposee.tabcombi[x].couleur=="vide"){
+                        combiproposee.tabcombi[x].couleur = couleurpionGraph.couleurAssociee;
+                         
+                        panneau_combiproposee.repaint();
                     }
+                    } 
+                    
                    
+
+                }
+
             });
 
         }
         
-        for (int k = 0; k < 4; k++) {
-            couleurGraph combiproposeeGraph = new couleurGraph("vide");
-            panneau_combiproposee.add(combiproposeeGraph);
+        
 
-        }
-        
-        
     }
 
     /**
@@ -156,6 +171,11 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         decors.add(btn_suppression);
 
         btn_validation.setText("Valider");
+        btn_validation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_validationActionPerformed(evt);
+            }
+        });
         decors.add(btn_validation);
 
         getContentPane().add(decors, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 630, 320, 50));
@@ -175,8 +195,16 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_startActionPerformed
 
     private void btn_suppressionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suppressionActionPerformed
-        // TODO add your handling code here:
+        suppression(combiproposee);
+        panneau_combiproposee.repaint();
     }//GEN-LAST:event_btn_suppressionActionPerformed
+
+    private void btn_validationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_validationActionPerformed
+       int []rep=comparaisoncombi(combiproposee);
+       affichagelangbonnecouleur(rep[1]);
+       affichagelangbonnecetp(rep[0]);
+ 
+    }//GEN-LAST:event_btn_validationActionPerformed
 
     public Combinaison initialisationcombimyst() {
         //renvoie une combinaison àléatoire qui sera la combinaison à retrouver
@@ -227,17 +255,17 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                     //si cpion==5 alors le pioncombi prend la valeur d'un pion mauve
                     Pion pionF = new Pion("fuschia");
                     pioncombi = pionF;
-                    break;   
-              
+                    break;
+
             }
-            plateauJeu.Combimystere.tabcombi[i] = pioncombi; 
+            plateauJeu.Combimystere.tabcombi[i] = pioncombi;
 //La valeur de la case du tableau indiquée prend comme référence celle du pion combi
         }
         return plateauJeu.Combimystere;
     }
 
     public boolean Combigagnante(Combinaison combiproposee) {
-    //retourne vrai si le joueur a trouvé la combinaison sinon renvoie faux
+        //retourne vrai si le joueur a trouvé la combinaison sinon renvoie faux
         int pionscorrects = 0;
         for (int i = 0; i < 4; i++) {
             if (plateauJeu.Combimystere.tabcombi[i].lireCouleur() == combiproposee.tabcombi[i].lireCouleur()) {
@@ -254,7 +282,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     public int[] comparaisoncombi(Combinaison combiproposee) {
         //retourne un tableau contenant le nombre de pions à la bonne position et de la bonne couleur dans la première case et 
         //le nombre de pions de la bonne couleur dans la seconde
-        
+
         int nbbonnecetp = 0;//nb de pion de la bonne couleur et de la bonne position
         int nbbonnecouleur = 0;//nb de pion de la bonne couleur
         boolean[] checkcombimyst = new boolean[4];
@@ -263,7 +291,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
             checkcombimyst[k] = false; //On initialise notre tableau qu'avec la valeur false
             checkcombiproposee[k] = false;//On initialise notre tableau qu'avec la valeur false
         }
-        for (int i = 0; i < 4; i++) { 
+        for (int i = 0; i < 4; i++) {
 //si les cases des combi sont identiques alors le pion est à la bonne position et est de la bonne couleur
             if (plateauJeu.Combimystere.tabcombi[i].lireCouleur() == combiproposee.tabcombi[i].lireCouleur()) {
                 nbbonnecetp = nbbonnecetp + 1;
@@ -271,25 +299,23 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                 checkcombiproposee[i] = true;
             }
         }
-        for(int j=0;j<4;j++){
-            for(int x=0;x<4;x++){
-                if(plateauJeu.Combimystere.tabcombi[j].lireCouleur() == combiproposee.tabcombi[x].lireCouleur()&&checkcombimyst[j]==false&&checkcombiproposee[x] ==false){
+        for (int j = 0; j < 4; j++) {
+            for (int x = 0; x < 4; x++) {
+                if (plateauJeu.Combimystere.tabcombi[j].lireCouleur() == combiproposee.tabcombi[x].lireCouleur() && checkcombimyst[j] == false && checkcombiproposee[x] == false) {
 //si des cases de positions ont la même valeur et n'ont pas été déjà check alors cela veut dire que le pion est de la bonne couleur mais pas à la bonne posiiton
-                    nbbonnecouleur=nbbonnecouleur+1;
+                    nbbonnecouleur = nbbonnecouleur + 1;
                     checkcombimyst[j] = true;
                     checkcombiproposee[x] = true;
                 }
             }
         }
-        
-       
-        int[]res=new int[2];
-        res[0]=nbbonnecetp;
-        res[1]=nbbonnecouleur;
+
+        int[] res = new int[2];
+        res[0] = nbbonnecetp;
+        res[1] = nbbonnecouleur;
         return res;
     }
 
-  
     public Languette affichagelangbonnecouleur(int nbbonnecouleur) {
         //Remplie de pion blanc le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
         Pion pionBl = new Pion("blanc");
@@ -312,42 +338,40 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
     public Combinaison combiproposee(Pion pion1, Pion pion2, Pion pion3, Pion pion4) {
         //renvoie la combinaison composée des pions en entré dans l'ordre donné en entrée aussi
-        Combinaison combiproposee=new Combinaison();
-        combiproposee.tabcombi[0]=pion1;
-        combiproposee.tabcombi[1]=pion2;
-        combiproposee.tabcombi[2]=pion3;
-        combiproposee.tabcombi[3]=pion4;
-        
-        return combiproposee;
+        Combinaison combi = new Combinaison();
+        combi.tabcombi[0] = pion1;
+        combi.tabcombi[1] = pion2;
+        combi.tabcombi[2] = pion3;
+        combi.tabcombi[3] = pion4;
+
+        return combi;
     }
-    
+
     public Combinaison suppression(Combinaison combiproposee) {
         //prend une combianais et supprime le dernier pion du tableau ayant une couleur différente de "vide"
-        
-        if (combiproposee.tabcombi[3].couleur!="vide"){ //si la couleur du pion de la dernière case n'est pas "vide" 
-                                                        //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[3].couleur="vide";
+
+        if (combiproposee.tabcombi[3].couleur != "vide") { //si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[3].couleur = "vide";
+            return combiproposee;
+        } else if (combiproposee.tabcombi[2].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[2].couleur = "vide";
+            return combiproposee;
+        } else if (combiproposee.tabcombi[1].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[1].couleur = "vide";
+            return combiproposee;
+        } else if (combiproposee.tabcombi[0].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[0].couleur = "vide";
             return combiproposee;
         }
-        else if (combiproposee.tabcombi[2].couleur!="vide"){//si la couleur du pion de la dernière case n'est pas "vide" 
-                                                            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[2].couleur="vide";
-            return combiproposee;
-        }
-        else if (combiproposee.tabcombi[1].couleur!="vide"){//si la couleur du pion de la dernière case n'est pas "vide" 
-                                                            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[1].couleur="vide";
-            return combiproposee;
-        }
-        else if (combiproposee.tabcombi[0].couleur!="vide"){//si la couleur du pion de la dernière case n'est pas "vide" 
-                                                             //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[0].couleur="vide";
-            return combiproposee;
-        }
-        
+
         return combiproposee; //si toutes les pions ont la couleur "vide" alors on retourne la combinaison 
-        
+
     }
+
     /**
      * @param args the command line arguments
      */
@@ -388,7 +412,6 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         Joueur J = new Joueur(nomjoueur);
         Combinaison combiMyst = plateauJeu.initialisationcombimyst();
         lbl_j_nom.setText(nomjoueur); //sur la fenêtre le lbl_J1_nom prend comme valeur le pseudo entrer pour le J1
-       
 
         lbl_j_essaiesrest.setText(J.EssaiesRestants + "");//le lbl_j1_desint affiche le nombre de désintegrateur du joueur1
         //on rajoute "" pour que ce soit un String car sinon nombreDesintegrateur est un entier et on veut un string
