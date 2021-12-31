@@ -33,50 +33,59 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         panneau_combiproposee.setVisible(false);//le panneau combiproposee n'est pas visible
         decors.setVisible(false);//le panneau avec les 2 boutons (supprimer et valider) nb'est pas visible
 
-         for (int y=0; y<4;y++){
-            
-                combiproposee.tabcombi[y]= new Pion("vide");
-         }
+         
         for (int i = 11; i >= 0; i--) {
             for (int j = 0; j < 4; j++) {
                 plateauGraphique pionGraph = new plateauGraphique();
-                Panneau_grilleJeu.add(pionGraph);
-                //permet de créer les panneaux dans le pannel associé, ici c'est le panel Panneau_grilleJeu
+                Panneau_grilleJeu.add(pionGraph);//permet de créer les panneaux dans le pannel associé, ici c'est le panel Panneau_grilleJeu
+                Pion p = pionGraph.pionAssocie;
+                
 
             }
         }
 
-        for (int k = 0; k < 4; k++) {
-            //plateauGraphique combiproposeeGraph = new plateauGraphique();
-            //panneau_combiproposee.add(combiproposeeGraph);
-            couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur);
-            panneau_combiproposee.add(combiproposeeGraph);
-
-        }
+        
 
         for (int l = 0; l < 8; l++) {
             couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
             Panneau_couleur.add(couleurpionGraph);
-
+            
+            //Cellule c = cellGraph.celluleAssociee;
+              //          if (c.JetonCourant == null) {
+                //            return; //s'il n' y a pas de jeton
+                  //      }
+              
+            
+            
             couleurpionGraph.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-
                     for (int x = 0; x < 4; x++) {
+                        Pion p=new Pion (couleurpionGraph.couleurAssociee);
                         if(combiproposee.tabcombi[x].couleur=="vide"){
-                        combiproposee.tabcombi[x].couleur = couleurpionGraph.couleurAssociee;
-                         
-                        panneau_combiproposee.repaint();
-                    }
-                    } 
+                        //combiproposee.tabcombi[x].couleur = couleurpionGraph.couleurAssociee;
+                        combiproposee.tabcombi[x]=p;
+                        }
+                        /*else if(combiproposee.tabcombi[0].couleur!="vide"||combiproposee.tabcombi[1].couleur!="vide"||combiproposee.tabcombi[2].couleur!="vide"||combiproposee.tabcombi[3].couleur!="vide"){
+                               couleurpionGraph.setEnabled(false); 
+                                }
+                        */
                     
-                   
-
+                    }
+                    
                 }
-
             });
-
         }
         
+        
+        for (int k = 0; k < 4; k++) {
+            //plateauGraphique combiproposeeGraph = new plateauGraphique();
+            //panneau_combiproposee.add(combiproposeeGraph);
+            
+            couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur );
+            panneau_combiproposee.add(combiproposeeGraph);
+            panneau_combiproposee.repaint();
+
+        }      
         
 
     }
@@ -155,7 +164,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         lbl_j_nom.setText("nomjoueur ");
         panneau_info_joueur.add(lbl_j_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
 
-        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, 290, 140));
+        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, 300, 160));
 
         panneau_combiproposee.setBackground(new java.awt.Color(255, 0, 255));
         getContentPane().add(panneau_combiproposee, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 540, 320, 90));
