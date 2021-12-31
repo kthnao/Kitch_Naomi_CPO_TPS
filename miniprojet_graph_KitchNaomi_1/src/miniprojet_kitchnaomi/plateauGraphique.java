@@ -25,7 +25,7 @@ public class plateauGraphique extends JLabel {
     ImageIcon img_vert = new javax.swing.ImageIcon(getClass().getResource("/images/vert.gif"));
     ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.gif"));
     
-    public plateauGraphique () {
+    public plateauGraphique (Pion unpion) {
         pionAssocie = new Pion("vide");
         this.setHorizontalAlignment(CENTER);
        //this.setText(pionAssocie.couleur);

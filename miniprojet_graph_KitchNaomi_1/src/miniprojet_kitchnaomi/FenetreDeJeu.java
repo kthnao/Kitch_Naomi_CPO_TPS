@@ -24,6 +24,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     Plateau plateauJeu = new Plateau();
     Combinaison combiproposee = new Combinaison();
     Joueur joueur;
+   
 
     public FenetreDeJeu() {
 
@@ -33,12 +34,14 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         panneau_combiproposee.setVisible(false);//le panneau combiproposee n'est pas visible
         decors.setVisible(false);//le panneau avec les 2 boutons (supprimer et valider) nb'est pas visible
 
-         
+        
         for (int i = 11; i >= 0; i--) {
             for (int j = 0; j < 4; j++) {
-                plateauGraphique pionGraph = new plateauGraphique();
+                //plateauGraphique pionGraph = new plateauGraphique();
+                plateauGraphique pionGraph = new plateauGraphique(plateauJeu.CellulesPlateau[i][j]);
                 Panneau_grilleJeu.add(pionGraph);//permet de créer les panneaux dans le pannel associé, ici c'est le panel Panneau_grilleJeu
-                Pion p = pionGraph.pionAssocie;
+                
+                
                 
 
             }
@@ -81,8 +84,9 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         for (int k = 0; k < 4; k++) {
             //plateauGraphique combiproposeeGraph = new plateauGraphique();
             //panneau_combiproposee.add(combiproposeeGraph);
+            //couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur );
+            plateauGraphique combiproposeeGraph  = new plateauGraphique(combiproposee.tabcombi[k]);
             
-            couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur );
             panneau_combiproposee.add(combiproposeeGraph);
             
 
@@ -446,6 +450,8 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         lbl_pbc1.setText("0");
         lbl_pbcbp.setText("0");
+        
+        
         
     }
 
