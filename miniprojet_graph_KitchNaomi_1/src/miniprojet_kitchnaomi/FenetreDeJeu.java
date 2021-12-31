@@ -64,6 +64,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                         if(combiproposee.tabcombi[x].couleur=="vide"){
                         //combiproposee.tabcombi[x].couleur = couleurpionGraph.couleurAssociee;
                         combiproposee.tabcombi[x]=p;
+                        
                         }
                         /*else if(combiproposee.tabcombi[0].couleur!="vide"||combiproposee.tabcombi[1].couleur!="vide"||combiproposee.tabcombi[2].couleur!="vide"||combiproposee.tabcombi[3].couleur!="vide"){
                                couleurpionGraph.setEnabled(false); 
@@ -83,7 +84,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
             
             couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur );
             panneau_combiproposee.add(combiproposeeGraph);
-            panneau_combiproposee.repaint();
+            
 
         }      
         
@@ -107,10 +108,14 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         btn_start = new javax.swing.JButton();
         panneau_info_joueur = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        lbl_j_essaiesrest = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lbl_j_nom = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lbl_j_essaiesrest1 = new javax.swing.JLabel();
+        lbl_pbc1 = new javax.swing.JLabel();
+        lbl_pbcbp = new javax.swing.JLabel();
         panneau_combiproposee = new javax.swing.JPanel();
         decors = new javax.swing.JPanel();
         btn_suppression = new javax.swing.JButton();
@@ -152,11 +157,8 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         jLabel4.setText("infos joueur");
         panneau_info_joueur.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 10, 130, 30));
 
-        lbl_j_essaiesrest.setText("nbessaierest");
-        panneau_info_joueur.add(lbl_j_essaiesrest, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
-
-        jLabel7.setText("nb essaies restants :");
-        panneau_info_joueur.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 20));
+        jLabel11.setText("nb pions de bonne couleur + position :");
+        panneau_info_joueur.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 260, 20));
 
         jLabel8.setText("joueur :");
         panneau_info_joueur.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
@@ -164,7 +166,22 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         lbl_j_nom.setText("nomjoueur ");
         panneau_info_joueur.add(lbl_j_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, -1, -1));
 
-        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, 300, 160));
+        jLabel9.setText("nb essaies restants :");
+        panneau_info_joueur.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 20));
+
+        jLabel10.setText("nb pions de bonne couleur :");
+        panneau_info_joueur.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 220, 20));
+
+        lbl_j_essaiesrest1.setText("nbessaierest");
+        panneau_info_joueur.add(lbl_j_essaiesrest1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
+
+        lbl_pbc1.setText("nbpionbc");
+        panneau_info_joueur.add(lbl_pbc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, -1, -1));
+
+        lbl_pbcbp.setText("nbpbcbp");
+        panneau_info_joueur.add(lbl_pbcbp, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, -1, 20));
+
+        getContentPane().add(panneau_info_joueur, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 190, 330, 160));
 
         panneau_combiproposee.setBackground(new java.awt.Color(255, 0, 255));
         getContentPane().add(panneau_combiproposee, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 540, 320, 90));
@@ -212,7 +229,9 @@ public class FenetreDeJeu extends javax.swing.JFrame {
        int []rep=comparaisoncombi(combiproposee);
        affichagelangbonnecouleur(rep[1]);
        affichagelangbonnecetp(rep[0]);
- 
+      joueur.EssaiesRestants--;
+      lbl_pbc1.setText(rep[1]+"");
+      lbl_pbcbp.setText(rep[0]+"");
     }//GEN-LAST:event_btn_validationActionPerformed
 
     public Combinaison initialisationcombimyst() {
@@ -420,11 +439,14 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         String nomjoueur = nom_joueur.getText();
         Joueur J = new Joueur(nomjoueur);
         Combinaison combiMyst = plateauJeu.initialisationcombimyst();
-        lbl_j_nom.setText(nomjoueur); //sur la fenêtre le lbl_J1_nom prend comme valeur le pseudo entrer pour le J1
+        lbl_j_nom.setText(nomjoueur); //sur la fenêtre le lbl_J_nom prend comme valeur le pseudo entrer pour le J1
 
-        lbl_j_essaiesrest.setText(J.EssaiesRestants + "");//le lbl_j1_desint affiche le nombre de désintegrateur du joueur1
+        lbl_j_essaiesrest1.setText(J.EssaiesRestants + "");//le lbl_j1_desint affiche le nombre d'essaie restant du joueur
         //on rajoute "" pour que ce soit un String car sinon nombreDesintegrateur est un entier et on veut un string
 
+        lbl_pbc1.setText("0");
+        lbl_pbcbp.setText("0");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -434,12 +456,16 @@ public class FenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JButton btn_suppression;
     private javax.swing.JButton btn_validation;
     private javax.swing.JPanel decors;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel lbl_j_essaiesrest;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbl_j_essaiesrest1;
     private javax.swing.JLabel lbl_j_nom;
+    private javax.swing.JLabel lbl_pbc1;
+    private javax.swing.JLabel lbl_pbcbp;
     private javax.swing.JTextField nom_joueur;
     private javax.swing.JPanel panneau_combiproposee;
     private javax.swing.JPanel panneau_creation_partie;
