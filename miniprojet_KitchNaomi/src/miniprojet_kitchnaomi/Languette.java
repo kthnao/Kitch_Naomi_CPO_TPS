@@ -15,7 +15,7 @@ public class Languette {
     String couleurlang;//peut être rouge ou blanche
     
     public Languette(){//contrusteur de la classe 
-        for (int i=0; i<3;i++){
+        for (int i=0; i<4;i++){
             
                 tablang[i]=null; //composé de 4 cases vides
   

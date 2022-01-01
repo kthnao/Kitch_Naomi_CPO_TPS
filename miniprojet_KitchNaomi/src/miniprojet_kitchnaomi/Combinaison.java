@@ -13,7 +13,7 @@ public class Combinaison {
     Pion [] tabcombi=new Pion[4];//Combinaison correspond à un tableau composé de 4 pions
     
     public Combinaison(){//contrusteur de la classe 
-        for (int i=0; i<3;i++){
+        for (int i=0; i<4;i++){
             
                 tabcombi[i]=null; //composé de 4 cases vides
             

@@ -24,7 +24,7 @@ public class Plateau {
     Pion pionB = new Pion("bleu");
     Pion pionM = new Pion("mauve");
     Pion pionBlc = new Pion("blanc");
-    Pion pionF= new Pion("fuschia");
+    Pion pionF = new Pion("fuschia");
 
     public Plateau() {//contrusteur de la classe 
         for (int i = 0; i < 12; i++) {
@@ -83,17 +83,17 @@ public class Plateau {
                     //si cpion==5 alors le pioncombi prend la valeur d'un pion mauve
                     Pion pionF = new Pion("fuschia");
                     pioncombi = pionF;
-                    break;   
-              
+                    break;
+
             }
-            Combimystere.tabcombi[i] = pioncombi; 
+            Combimystere.tabcombi[i] = pioncombi;
 //La valeur de la case du tableau indiquée prend comme référence celle du pion combi
         }
         return Combimystere;
     }
 
     public boolean Combigagnante(Combinaison combiproposee) {
-    //retourne vrai si le joueur a trouvé la combinaison sinon renvoie faux
+        //retourne vrai si le joueur a trouvé la combinaison sinon renvoie faux
         int pionscorrects = 0;
         for (int i = 0; i < 4; i++) {
             if (Combimystere.tabcombi[i].lireCouleur() == combiproposee.tabcombi[i].lireCouleur()) {
@@ -110,7 +110,7 @@ public class Plateau {
     public int[] comparaisoncombi(Combinaison combiproposee) {
         //retourne un tableau contenant le nombre de pions à la bonne position et de la bonne couleur dans la première case et 
         //le nombre de pions de la bonne couleur dans la seconde
-        
+
         int nbbonnecetp = 0;//nb de pion de la bonne couleur et de la bonne position
         int nbbonnecouleur = 0;//nb de pion de la bonne couleur
         boolean[] checkcombimyst = new boolean[4];
@@ -119,7 +119,7 @@ public class Plateau {
             checkcombimyst[k] = false; //On initialise notre tableau qu'avec la valeur false
             checkcombiproposee[k] = false;//On initialise notre tableau qu'avec la valeur false
         }
-        for (int i = 0; i < 4; i++) { 
+        for (int i = 0; i < 4; i++) {
 //si les cases des combi sont identiques alors le pion est à la bonne position et est de la bonne couleur
             if (Combimystere.tabcombi[i].lireCouleur() == combiproposee.tabcombi[i].lireCouleur()) {
                 nbbonnecetp = nbbonnecetp + 1;
@@ -127,25 +127,23 @@ public class Plateau {
                 checkcombiproposee[i] = true;
             }
         }
-        for(int j=0;j<4;j++){
-            for(int x=0;x<4;x++){
-                if(Combimystere.tabcombi[j].lireCouleur() == combiproposee.tabcombi[x].lireCouleur()&&checkcombimyst[j]==false&&checkcombiproposee[x] ==false){
+        for (int j = 0; j < 4; j++) {
+            for (int x = 0; x < 4; x++) {
+                if (Combimystere.tabcombi[j].lireCouleur() == combiproposee.tabcombi[x].lireCouleur() && checkcombimyst[j] == false && checkcombiproposee[x] == false) {
 //si des cases de positions ont la même valeur et n'ont pas été déjà check alors cela veut dire que le pion est de la bonne couleur mais pas à la bonne posiiton
-                    nbbonnecouleur=nbbonnecouleur+1;
+                    nbbonnecouleur = nbbonnecouleur + 1;
                     checkcombimyst[j] = true;
                     checkcombiproposee[x] = true;
                 }
             }
         }
-        
-       
-        int[]res=new int[2];
-        res[0]=nbbonnecetp;
-        res[1]=nbbonnecouleur;
+
+        int[] res = new int[2];
+        res[0] = nbbonnecetp;
+        res[1] = nbbonnecouleur;
         return res;
     }
 
-  
     public Languette affichagelangbonnecouleur(int nbbonnecouleur) {
         //Remplie de pion blanc le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
         Pion pionBl = new Pion("blanc");
@@ -168,14 +166,81 @@ public class Plateau {
 
     public Combinaison combiproposee(Pion pion1, Pion pion2, Pion pion3, Pion pion4) {
         //renvoie la combinaison composée des pions en entré dans l'ordre donné en entrée aussi
-        Combinaison combiproposee=new Combinaison();
-        combiproposee.tabcombi[0]=pion1;
-        combiproposee.tabcombi[1]=pion2;
-        combiproposee.tabcombi[2]=pion3;
-        combiproposee.tabcombi[3]=pion4;
-        
+        Combinaison combiproposee = new Combinaison();
+        combiproposee.tabcombi[0] = pion1;
+        combiproposee.tabcombi[1] = pion2;
+        combiproposee.tabcombi[2] = pion3;
+        combiproposee.tabcombi[3] = pion4;
+
         return combiproposee;
     }
 
-    
+    public Combinaison suppression(Combinaison combiproposee) {
+        //prend une combianais et supprime le dernier pion du tableau ayant une couleur différente de "vide"
+
+        if (combiproposee.tabcombi[3].couleur != "vide") { //si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[3].couleur = "vide";
+            return combiproposee;
+        } else if (combiproposee.tabcombi[2].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[2].couleur = "vide";
+            return combiproposee;
+        } else if (combiproposee.tabcombi[1].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[1].couleur = "vide";
+            return combiproposee;
+        } else if (combiproposee.tabcombi[0].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
+            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
+            combiproposee.tabcombi[0].couleur = "vide";
+            return combiproposee;
+        }
+
+        return combiproposee; //si toutes les pions ont la couleur "vide" alors on retourne la combinaison 
+
+    }
+
+    public void afficherPlateauSurConsole() {
+        
+        //fonction d’affichage de la grille sur la console. 
+        //Doit faire apparaitre les couleurs des pions des combinaisons
+        for (int i = 11; i >= 0; i--) { 
+            for (int j = 0; j < 4; j++) {
+
+                String couleur_pion = CellulesPlateau[i][j].couleur;
+                switch (couleur_pion) {
+                    case "vide":
+                        System.out.print("");
+                        break;
+                    case "rouge":
+                        System.out.print("\033[41m   ");
+                        break;
+                    case "gris":
+                        System.out.print("\033[47m  ");
+                        break;
+                    case "bleu":
+                        System.out.print("\033[44m  ");
+                        break;
+                    case "blanc":
+                        System.out.print("\033[47m   ");
+                        break;
+                    case "jaune":
+                        System.out.print("\033[43m  ");
+                        break;
+                    case "mauve":
+                        System.out.print("\033[45m   ");
+                        break;
+                    case "vert":
+                        System.out.print("\033[42m  ");
+                        break;
+                    case "turquoise":
+                        System.out.print("\033[46m  ");
+                        break;
+                    //System.out.println(""); //sinon on affiche rien
+                }
+
+            }
+
+        }
+    }
 }

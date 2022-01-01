@@ -42,7 +42,7 @@ public class Partie {
                 cpion = "mauve";
                 break;
             case 4:
-                cpion = "orange";
+                cpion = "turquoise";
                 break;
             case 5:
                 cpion = "vert";
@@ -51,7 +51,7 @@ public class Partie {
                 cpion = "bleu";
                 break;
             case 7:
-                cpion = "fuschia";
+                cpion = "gris";
                 break;
             case 8:
                 cpion = "blanc";
@@ -92,7 +92,7 @@ public class Partie {
                 cpion = "mauve";
                 break;
             case 4:
-                cpion = "orange";
+                cpion = "turquoise";
                 break;
             case 5:
                 cpion = "vert";
@@ -101,7 +101,7 @@ public class Partie {
                 cpion = "bleu";
                 break;
             case 7:
-                cpion = "fuschia";
+                cpion = "gris";
                 break;
             case 8:
                 cpion = "blanc";
