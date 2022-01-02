@@ -5,6 +5,8 @@
  */
 package miniprojet_kitchnaomi;
 
+import java.util.Scanner;
+
 /**
  *
  * @author naomi
@@ -19,7 +21,11 @@ public class Miniprojet_KitchNaomi {
         /*idée d'ajout d'option : ajout de couleur, aggrandir le plateau(la grille), 
 choisir le nombre d'essaies...*/
       
-             Joueur J1=new Joueur("Nao");
+        Scanner sc;
+        System.out.println("bonjour veuillez saisir votre pseudo");
+        sc = new Scanner(System.in);
+        String nom = sc.next();
+        Joueur J1=new Joueur(nom);
         Partie test=new Partie(J1);
         test.debuterpartie();
      

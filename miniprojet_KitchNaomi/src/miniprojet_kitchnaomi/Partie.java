@@ -40,7 +40,8 @@ public class Partie {
         }
         //On initialise les languettes sur l'affichage pour qu'elles s'affichent blanches en donnant leur valeur au cellule du plateau de jeu
         PlateauJeu.afficherPlateauSurConsole();
-
+        System.out.println("Bienvenue dans le jeu Mastermind, vous avez 12 essaies pour essayer de deviner la combinaison mystère qu'à généré l'ordinateur ! \n cela peut paraître difficile comme ça mais ne vous inquiétez pas ! \n Pour cela l'ordinateur va vous donner des indices, à chaque essaie vous saurez si vous avez des pions qui sont de la bonnes couleur et s'ils sont bien placés \n À droite vous avez des lumières vertes : le nombre de ces lumières correspond au nombres de pions de la bonnes couleurs et du bon emplacement \n à gauche vous avez des lumières rouges : le nombre de lumière correpond au nombre de pions de la bonne couleur mais mal placés \n À présent c'est à vous de jouer et bonne chance !");
+        
         for (int i = 0; i < 4; i++) {//correspond au 4 pions que le joueur va choisir pour sa combinaison proposée
             System.out.println("\nChoisissez la couleur d'un pion de votre combinaison :" + "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour fuschia" + "\n 4 pour turquoise" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour noir" + "\n 8 pour blanc");
             Scanner sc = new Scanner(System.in);
