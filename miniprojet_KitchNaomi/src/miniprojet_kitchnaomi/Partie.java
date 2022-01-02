@@ -26,21 +26,22 @@ public class Partie {
         PlateauJeu = new Plateau();
         Combinaison combiMyst = PlateauJeu.initialisationcombimyst();
         Combinaison combiProposee = new Combinaison();
-        Languette langVerte = new Languette();
-        Languette langRouge = new Languette();
         
-        for(int d=0;d<12;d++){
-            for(int e=0;e<4;e++){
+        Languette langRouge = new Languette();
+        Languette langVerte = new Languette();
+        
+
+        for (int d = 0; d < 12; d++) {
+            for (int e = 0; e < 4; e++) {
                 PlateauJeu.CellulesPlateau[d][e] = langRouge.tablang[e];
             }
-            for(int f=8;f<12;f++){
-                PlateauJeu.CellulesPlateau[d][f] = langRouge.tablang[f];
+            for (int f = 8; f < 12; f++) {
+                PlateauJeu.CellulesPlateau[d][f] = langVerte.tablang[f];
             }
         }
         //On initialise les languettes sur l'affichage pour qu'elles s'affichent blanches en donnant leur valeur au cellule du plateau de jeu
         PlateauJeu.afficherPlateauSurConsole();
-        
-        
+
         for (int i = 0; i < 4; i++) {
             System.out.println("\nChoisissez la couleur d'un pion de votre combinaison :" + "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour fuschia" + "\n 4 pour turquoise" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour noir" + "\n 8 pour blanc");
             Scanner sc = new Scanner(System.in);
@@ -93,30 +94,16 @@ public class Partie {
         for (int b = 8; b < 12; b++) {
             PlateauJeu.CellulesPlateau[0][b] = langVerte.tablang[b];
         }
-        System.out.println(langVerte.tablang[8].couleur);
-        System.out.println(langVerte.tablang[9].couleur);
-        System.out.println(langVerte.tablang[10].couleur);
-        System.out.println(langVerte.tablang[11].couleur);
-        System.out.println(langRouge.tablang[0].couleur);
-        System.out.println(langRouge.tablang[1].couleur);
-        System.out.println(langRouge.tablang[2].couleur);
-        System.out.println(langRouge.tablang[3].couleur);
+
         System.out.println(combiMyst.tabcombi[0].couleur);
         System.out.println(combiMyst.tabcombi[1].couleur);
         System.out.println(combiMyst.tabcombi[2].couleur);
         System.out.println(combiMyst.tabcombi[3].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][0].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][1].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][2].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][3].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][8].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][9].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][10].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[0][11].couleur);
 
         System.out.println("Vous avez " + nbpionbonnecetp + " pion(s) bien placé(s) et de bonne couleur et " + nbpionbonnecouleur + " pion(s) de bonne couleur mais mal positionné(s)");
         joueurCourant.EssaiesRestants--;
         System.out.println("il vous reste " + joueurCourant.EssaiesRestants + " essaies restants");
+        PlateauJeu.afficherPlateauSurConsole();
 
         //Combinaison combiProposee = PlateauJeu.combiproposee(pion1, pion2, pion3, pion4);//On créer la combinaison proposée par le joueur
         while (PlateauJeu.Combigagnante(combiProposee) == false && joueurCourant.EssaiesRestants != 0) {
@@ -175,33 +162,28 @@ public class Partie {
                 for (int b = 8; b < 12; b++) {
                     PlateauJeu.CellulesPlateau[j][b] = langVerte.tablang[b];
                 }
-                PlateauJeu.afficherPlateauSurConsole();
+
                 System.out.println("Vous avez " + nbpionbonnecetp + " pion(s) bien placé(s) et de bonne couleur et " + nbpionbonnecouleur + " pion(s) de bonne couleur mais mal positionné(s)");
                 joueurCourant.EssaiesRestants--;
                 System.out.println("il vous reste " + joueurCourant.EssaiesRestants + " essaies restants");
+                PlateauJeu.afficherPlateauSurConsole();
                 if (PlateauJeu.Combigagnante(combiProposee) == true || joueurCourant.EssaiesRestants == 0) {
                     break;
                 }
+
+                System.out.println(combiMyst.tabcombi[0].couleur);
+                System.out.println(combiMyst.tabcombi[1].couleur);
+                System.out.println(combiMyst.tabcombi[2].couleur);
+                System.out.println(combiMyst.tabcombi[3].couleur);
                 System.out.println(langVerte.tablang[8].couleur);
-        System.out.println(langVerte.tablang[9].couleur);
-        System.out.println(langVerte.tablang[10].couleur);
-        System.out.println(langVerte.tablang[11].couleur);
-        System.out.println(langRouge.tablang[0].couleur);
-        System.out.println(langRouge.tablang[1].couleur);
-        System.out.println(langRouge.tablang[2].couleur);
-        System.out.println(langRouge.tablang[3].couleur);
-        System.out.println(combiMyst.tabcombi[0].couleur);
-        System.out.println(combiMyst.tabcombi[1].couleur);
-        System.out.println(combiMyst.tabcombi[2].couleur);
-        System.out.println(combiMyst.tabcombi[3].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][0].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][1].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][2].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][3].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][8].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][9].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][10].couleur);
-        System.out.println(PlateauJeu.CellulesPlateau[j][11].couleur);
+                System.out.println(langVerte.tablang[9].couleur);
+                System.out.println(langVerte.tablang[10].couleur);
+                System.out.println(langVerte.tablang[11].couleur);
+                System.out.println(PlateauJeu.CellulesPlateau[j][8].couleur);
+                System.out.println(PlateauJeu.CellulesPlateau[j][9].couleur);
+                System.out.println(PlateauJeu.CellulesPlateau[j][10].couleur);
+                System.out.println(PlateauJeu.CellulesPlateau[j][11].couleur);
+                
 
             }
 

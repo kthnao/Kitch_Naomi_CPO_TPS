@@ -22,7 +22,7 @@ public class Plateau {
     Pion pionJ = new Pion("jaune");
     Pion pionN = new Pion("noir");
     Pion pionB = new Pion("bleu");
-    Pion pionM = new Pion("mauve");
+    Pion pionF = new Pion("fuschia");
     Pion pionBlc = new Pion("blanc");
     Pion pionT = new Pion("turquoise");
 
@@ -71,7 +71,7 @@ public class Plateau {
                     break;
                 case 5:
                     //si cpion==5 alors le pioncombi prend la valeur d'un pion mauve
-                    Pion pionF = new Pion("fushia");
+                    Pion pionF = new Pion("fuschia");
                     pioncombi = pionF;
                     break;
                 case 6:
@@ -147,21 +147,31 @@ public class Plateau {
     public Languette langbonnecouleur(int nbbonnecouleur) {
         //Remplie de pion rouge le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
         Pion pionrouge = new Pion("rougel");
+        Pion pionblanc = new Pion("blancl");
+        langbonnecouleur.couleurlang = pionrouge.couleur;//la couleur de la languette correspond à la couleur des pions
         for (int i = 0; i < nbbonnecouleur; i++) {
             langbonnecouleur.tablang[i] = pionrouge;
-            langbonnecouleur.couleurlang = pionrouge.couleur;//la couleur de la languette correspond à la couleur des pions
+        }
+        for (int j = nbbonnecouleur; j < 4; j++) {
+            langbonnecouleur.tablang[j] = pionblanc;
         }
         return langbonnecouleur;
     }
 
     public Languette langbonnecetp(int nbbonnecetp) {
         //Remplie de pion vert le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
+
         Pion pionvert = new Pion("vertl");
-        for (int i = 8; i < 8+nbbonnecetp; i++) {
-           //je mets 4+ car de base le tableau faisait une taille de 4 cases or j'ai du le passer à 12 pour la fonction de l'affichage donc pour que cela marche avec mon code je me sui arrangée
+        Pion pionblanc = new Pion("blancl");
+        langbonnecetp.couleurlang = pionvert.couleur;//la couleur de la languette correspond à la couleur des pions
+        for (int i = 8; i < 8 + nbbonnecetp; i++) {
+            //je mets 4+ car de base le tableau faisait une taille de 4 cases or j'ai du le passer à 12 pour la fonction de l'affichage donc pour que cela marche avec mon code je me sui arrangée
             langbonnecetp.tablang[i] = pionvert;
         }
-        langbonnecetp.couleurlang = pionvert.couleur;//la couleur de la languette correspond à la couleur des pions
+        for (int j = 8 + nbbonnecetp; j < 12; j++) {
+            langbonnecetp.tablang[j] = pionblanc;
+        }
+
         return langbonnecetp;
     }
 
@@ -207,19 +217,16 @@ public class Plateau {
         //Doit faire apparaitre les couleurs des pions des combinaisons
         for (int i = 11; i >= 0; i--) {
             for (int j = 0; j < 12; j++) {
-
-                if (j == 0 && CellulesPlateau[i][j].couleur == "rougel" || j == 1 && CellulesPlateau[i][j].couleur == "rougel" || j == 2 && CellulesPlateau[i][j].couleur == "rougel" || j == 3 && CellulesPlateau[i][j].couleur == "rougel") {
-                    System.out.print("\033[41m   ");
-                }
-                if (j == 8 && CellulesPlateau[i][j].couleur == "vertl" || j == 9 && CellulesPlateau[i][j].couleur == "vertl" || j == 10 && CellulesPlateau[i][j].couleur == "vertl" || j == 11 && CellulesPlateau[i][j].couleur == "vertl") {
-                    System.out.print("\033[42m   ");
-                }
-                if (j == 0 && CellulesPlateau[i][j].couleur == "blancl" || j == 1 && CellulesPlateau[i][j].couleur == "blancl" || j == 2 && CellulesPlateau[i][j].couleur == "blancl" || j == 3 && CellulesPlateau[i][j].couleur == "blancl" || j == 8 && CellulesPlateau[i][j].couleur == "blancl" || j == 9 && CellulesPlateau[i][j].couleur == "blancl" || j == 10 && CellulesPlateau[i][j].couleur == "blancl" || j == 11 && CellulesPlateau[i][j].couleur == "blancl") {
-                    System.out.print("\033[47m   ");
-
-                }
                 if (CellulesPlateau[i][j].couleur == "vide") {
-                    System.out.print(" X ");
+                    System.out.print("\033[30m X ");
+                }
+                if (j == 0 && CellulesPlateau[i][j].couleur == "rougel" || j == 1 && CellulesPlateau[i][j].couleur == "rougel" || j == 2 && CellulesPlateau[i][j].couleur == "rougel" || j == 3 && CellulesPlateau[i][j].couleur == "rougel") {
+                    System.out.print("\033[31m X ");
+                } else if (j == 8 && CellulesPlateau[i][j].couleur == "vertl" || j == 9 && CellulesPlateau[i][j].couleur == "vertl" || j == 10 && CellulesPlateau[i][j].couleur == "vertl" || j == 11 && CellulesPlateau[i][j].couleur == "vertl") {
+                    System.out.print("\033[32m X ");
+                } else if (j == 0 && CellulesPlateau[i][j].couleur == "blancl" || j == 1 && CellulesPlateau[i][j].couleur == "blancl" || j == 2 && CellulesPlateau[i][j].couleur == "blancl" || j == 3 && CellulesPlateau[i][j].couleur == "blancl" || j == 8 && CellulesPlateau[i][j].couleur == "blancl" || j == 9 && CellulesPlateau[i][j].couleur == "blancl" || j == 10 && CellulesPlateau[i][j].couleur == "blancl" || j == 11 && CellulesPlateau[i][j].couleur == "blancl") {
+                    System.out.print("\033[37m X ");
+
                 } else if (CellulesPlateau[i][j].couleur == "rouge") {
                     System.out.print("\033[31m O ");
                 } else if (CellulesPlateau[i][j].couleur == "noir") {
