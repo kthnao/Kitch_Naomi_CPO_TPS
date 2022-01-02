@@ -15,7 +15,7 @@ public class Combinaison {
     public Combinaison(){//contrusteur de la classe 
         for (int i=0; i<4;i++){
             
-                tabcombi[i]=null; //composé de 4 cases vides
+                tabcombi[i]= new Pion("vide"); //composé de 4 cases de pion d'aucune couleur (de couleur "vide")
             
         }
     }

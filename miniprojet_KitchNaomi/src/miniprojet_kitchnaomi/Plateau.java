@@ -148,11 +148,13 @@ public class Plateau {
         //Remplie de pion rouge le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
         Pion pionrouge = new Pion("rougel");
         Pion pionblanc = new Pion("blancl");
+        int limite=4-nbbonnecouleur;
         langbonnecouleur.couleurlang = pionrouge.couleur;//la couleur de la languette correspond à la couleur des pions
-        for (int i = 0; i < nbbonnecouleur; i++) {
+        for (int i = 3; i >=limite; i--) {//On le met dans ce sens pour que l'affichage des deux languettes soit symétrique 
+            //c'est à dire qu'on remplie de 3 à 0 pour les languettes de gauche et de 8 à 11 pour les languettes de droite
             langbonnecouleur.tablang[i] = pionrouge;
         }
-        for (int j = nbbonnecouleur; j < 4; j++) {
+        for (int j = limite-1; j >=0; j--) {
             langbonnecouleur.tablang[j] = pionblanc;
         }
         return langbonnecouleur;
@@ -186,9 +188,13 @@ public class Plateau {
         return combiproposee;
     }
 
-    public Combinaison suppression(Combinaison combiproposee) {
-        //prend une combianais et supprime le dernier pion du tableau ayant une couleur différente de "vide"
-
+    public Combinaison suppression(Combinaison combiproposee, int placecombi) {
+        //remplace l'élément dans la place associée de la combi par un pion de couleur vide
+        Pion vide=new Pion("vide");
+        combiproposee.tabcombi[placecombi]=vide;
+        return combiproposee;
+        
+        /*prend une combianais et supprime le dernier pion du tableau ayant une couleur différente de "vide"
         if (combiproposee.tabcombi[3].couleur != "vide") { //si la couleur du pion de la dernière case n'est pas "vide" 
             //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
             combiproposee.tabcombi[3].couleur = "vide";
@@ -206,8 +212,7 @@ public class Plateau {
             combiproposee.tabcombi[0].couleur = "vide";
             return combiproposee;
         }
-
-        return combiproposee; //si toutes les pions ont la couleur "vide" alors on retourne la combinaison 
+        return combiproposee; //si toutes les pions ont la couleur "vide" alors on retourne la combinaison */
 
     }
 
