@@ -23,9 +23,9 @@ public class Partie {
     }
 
     public void debuterpartie() {
-        PlateauJeu = new Plateau();
-        Combinaison combiMyst = PlateauJeu.initialisationcombimyst();
-        Combinaison combiProposee = new Combinaison();
+        PlateauJeu = new Plateau(); //on initialise le plateau
+        Combinaison combiMyst = PlateauJeu.initialisationcombimyst(); //on initialise la combinaison qui doit petre trouvée
+        Combinaison combiProposee = new Combinaison(); 
 
         Languette langRouge = new Languette();
         Languette langVerte = new Languette();
@@ -41,7 +41,7 @@ public class Partie {
         //On initialise les languettes sur l'affichage pour qu'elles s'affichent blanches en donnant leur valeur au cellule du plateau de jeu
         PlateauJeu.afficherPlateauSurConsole();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {//correspond au 4 pions que le joueur va choisir pour sa combinaison proposée
             System.out.println("\nChoisissez la couleur d'un pion de votre combinaison :" + "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour fuschia" + "\n 4 pour turquoise" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour noir" + "\n 8 pour blanc");
             Scanner sc = new Scanner(System.in);
             int choix = sc.nextInt(); //On demande au joueur son choix
@@ -86,21 +86,22 @@ public class Partie {
             //je n'ai pas fait une boucle allant directement à ses colonnes car sinon ça allait bloqué pour ma combinaison qui ne comporte que 4 cases (0,1,2 et 3)
             PlateauJeu.afficherPlateauSurConsole();
 
-            System.out.println("Souhaitez vous supprimer ce pion ? Si oui entrez 1 sinon entrez 2");
+            System.out.println("Souhaitez vous supprimer ce pion ? Si oui entrez 1 sinon entrez 2"); 
+            //ajout de la possibilité de supprimer le pion qu'on vient de choisir, cependant cela est possible qu'une fois pour chaque pion
             choix = sc.nextInt();
-            while (choix != 2 && choix != 1) {
+            while (choix != 2 && choix != 1) {//code au cas où l'uitlisateur n'est pas très doué
                 System.out.println("Ce choix est inexistant, veuillez choisir à nouveau");
                 System.out.println("Souhaitez vous supprimer ce pion ? Si oui entrez 1 si non entrez 2");
                 choix = sc.nextInt();
             }
-            if (choix == 1) {
+            if (choix == 1) {//si le joueur souhaite supprimer le pion et le remplacer par un autre
                 PlateauJeu.suppression(combiProposee, i);
                 System.out.println("Voici le plateau mis à jour");
                 PlateauJeu.afficherPlateauSurConsole();
                 System.out.println("Choisissez la couleur d'un pion de votre combinaison : " + "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour fuschia" + "\n 4 pour turquoise" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour noir" + "\n 8 pour blanc");
                 choix = sc.nextInt(); //On demande au joueur son choix
 
-                while (choix < 1 || choix > 8) {
+                while (choix < 1 || choix > 8) {//tant que le choix du joueur n'est pas un choix entre 1 et 8
                     System.out.println("Ce choix est inexistant, veuillez choisir à nouveau");
                     System.out.println("\nChoisissez la couleur d'un pion de votre combinaison :" + "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour fuschia" + "\n 4 pour turquoise" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour noir" + "\n 8 pour blanc");
                     choix = sc.nextInt();
@@ -134,12 +135,12 @@ public class Partie {
                 }
             }
             pion = new Pion(cpion);//On créer le premier pion de la combinaison proposée par le joueur
-            combiProposee.tabcombi[i] = pion;
+            combiProposee.tabcombi[i] = pion;//la case du tableau en question prend comme valeur la valeur du pion
 
-            PlateauJeu.CellulesPlateau[0][4 + i] = pion;
+            PlateauJeu.CellulesPlateau[0][4 + i] = pion; //la cellule du plateau en question prend la valeur du pion
             //je mets 4+ car il y a 12 colonnes dans le plateau mais je veux que les pions soient au centre donc soient placé dans les colonnes 4,5,6 et 7
             //je n'ai pas fait une boucle allant directement à ses colonnes car sinon ça allait bloqué pour ma combinaison qui ne comporte que 4 cases (0,1,2 et 3)
-            PlateauJeu.afficherPlateauSurConsole();
+            PlateauJeu.afficherPlateauSurConsole();//on affiche le plateau sur la console
 
         }
 
@@ -172,9 +173,9 @@ public class Partie {
         while (PlateauJeu.Combigagnante(combiProposee) == false && joueurCourant.EssaiesRestants != 0) {
 //tant que le joueur n'a pas trouvé la combinaison ou tant qu'il a toujours des essaies possibles
 
-            for (int j = 1; j < 12; j++) {
+            for (int j = 1; j < 12; j++) {//correspond au 11 tours restant du joueur
 
-                for (int k = 0; k < 4; k++) {
+                for (int k = 0; k < 4; k++) {//correspond au 4 pions que le joueur va choisir pour sa combinaison proposée
                     System.out.println("Choisissez la couleur d'un pion de votre combinaison : " + "\n 1 pour rouge" + "\n 2 pour jaune" + "\n 3 pour fuschia" + "\n 4 pour turquoise" + "\n 5 pour vert" + "\n 6 pour bleu" + "\n 7 pour noir" + "\n 8 pour blanc");
                     Scanner sc = new Scanner(System.in);
                     int choix = sc.nextInt(); //On demande au joueur son choix
@@ -306,9 +307,9 @@ public class Partie {
 
         }
 
-        if (PlateauJeu.Combigagnante(combiProposee) == true) {
+        if (PlateauJeu.Combigagnante(combiProposee) == true) {//si le joueur a retrouvé la bonne combinaison
             System.out.println("Félicitation vous avez gagné");
-        } else {
+        } else {//si le joueur n'a pas trouvé la bonne combinaison et n'a plus d'essaies restants
             System.out.println("Vous avez perdu !");
         }
 
