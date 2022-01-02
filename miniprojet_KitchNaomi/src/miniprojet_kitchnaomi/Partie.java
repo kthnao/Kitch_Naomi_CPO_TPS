@@ -95,10 +95,13 @@ public class Partie {
             PlateauJeu.CellulesPlateau[0][b] = langVerte.tablang[b];
         }
 
+        /*
+            Permet de vérifier mes codes 
         System.out.println(combiMyst.tabcombi[0].couleur);
         System.out.println(combiMyst.tabcombi[1].couleur);
         System.out.println(combiMyst.tabcombi[2].couleur);
         System.out.println(combiMyst.tabcombi[3].couleur);
+*/
 
         System.out.println("Vous avez " + nbpionbonnecetp + " pion(s) bien placé(s) et de bonne couleur et " + nbpionbonnecouleur + " pion(s) de bonne couleur mais mal positionné(s)");
         joueurCourant.EssaiesRestants--;
@@ -167,22 +170,16 @@ public class Partie {
                 joueurCourant.EssaiesRestants--;
                 System.out.println("il vous reste " + joueurCourant.EssaiesRestants + " essaies restants");
                 PlateauJeu.afficherPlateauSurConsole();
+                 /*
+            Permet de vérifier mes codes 
+        System.out.println(combiMyst.tabcombi[0].couleur);
+        System.out.println(combiMyst.tabcombi[1].couleur);
+        System.out.println(combiMyst.tabcombi[2].couleur);
+        System.out.println(combiMyst.tabcombi[3].couleur);
+*/
                 if (PlateauJeu.Combigagnante(combiProposee) == true || joueurCourant.EssaiesRestants == 0) {
                     break;
                 }
-
-                System.out.println(combiMyst.tabcombi[0].couleur);
-                System.out.println(combiMyst.tabcombi[1].couleur);
-                System.out.println(combiMyst.tabcombi[2].couleur);
-                System.out.println(combiMyst.tabcombi[3].couleur);
-                System.out.println(langVerte.tablang[8].couleur);
-                System.out.println(langVerte.tablang[9].couleur);
-                System.out.println(langVerte.tablang[10].couleur);
-                System.out.println(langVerte.tablang[11].couleur);
-                System.out.println(PlateauJeu.CellulesPlateau[j][8].couleur);
-                System.out.println(PlateauJeu.CellulesPlateau[j][9].couleur);
-                System.out.println(PlateauJeu.CellulesPlateau[j][10].couleur);
-                System.out.println(PlateauJeu.CellulesPlateau[j][11].couleur);
                 
 
             }
