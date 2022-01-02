@@ -40,26 +40,22 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                 //plateauGraphique pionGraph = new plateauGraphique();
                 plateauGraphique pionGraph = new plateauGraphique(plateauJeu.CellulesPlateau[i][j]);
                 Panneau_grilleJeu.add(pionGraph);//permet de créer les panneaux dans le pannel associé, ici c'est le panel Panneau_grilleJeu
-                
-                
-                
-
+            
             }
         }
 
-        
+        for (int k = 0; k < 4; k++) {
+            //plateauGraphique combiproposeeGraph = new plateauGraphique();
+            //panneau_combiproposee.add(combiproposeeGraph);
+            couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur);
+            //plateauGraphique combiproposeeGraph  = new plateauGraphique(combiproposee.tabcombi[k]);
+            panneau_combiproposee.add(combiproposeeGraph);
+        }    
 
         for (int l = 0; l < 8; l++) {
             couleurGraph couleurpionGraph = new couleurGraph(tabcouleur[l]);
             Panneau_couleur.add(couleurpionGraph);
-            
-            //Cellule c = cellGraph.celluleAssociee;
-              //          if (c.JetonCourant == null) {
-                //            return; //s'il n' y a pas de jeton
-                  //      }
-              
-            
-            
+           
             couleurpionGraph.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     for (int x = 0; x < 4; x++) {
@@ -67,7 +63,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
                         if(combiproposee.tabcombi[x].couleur=="vide"){
                         //combiproposee.tabcombi[x].couleur = couleurpionGraph.couleurAssociee;
                         combiproposee.tabcombi[x]=p;
-                        
+                        panneau_combiproposee.repaint();
                         }
                         /*else if(combiproposee.tabcombi[0].couleur!="vide"||combiproposee.tabcombi[1].couleur!="vide"||combiproposee.tabcombi[2].couleur!="vide"||combiproposee.tabcombi[3].couleur!="vide"){
                                couleurpionGraph.setEnabled(false); 
@@ -81,16 +77,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
         }
         
         
-        for (int k = 0; k < 4; k++) {
-            //plateauGraphique combiproposeeGraph = new plateauGraphique();
-            //panneau_combiproposee.add(combiproposeeGraph);
-            //couleurGraph combiproposeeGraph = new couleurGraph(combiproposee.tabcombi[k].couleur );
-            plateauGraphique combiproposeeGraph  = new plateauGraphique(combiproposee.tabcombi[k]);
-            
-            panneau_combiproposee.add(combiproposeeGraph);
-            
-
-        }      
+          
         
 
     }
@@ -131,7 +118,7 @@ public class FenetreDeJeu extends javax.swing.JFrame {
 
         Panneau_grilleJeu.setBackground(new java.awt.Color(153, 153, 153));
         Panneau_grilleJeu.setLayout(new java.awt.GridLayout(12, 4));
-        getContentPane().add(Panneau_grilleJeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 700));
+        getContentPane().add(Panneau_grilleJeu, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 350, 700));
 
         Panneau_couleur.setBackground(new java.awt.Color(0, 255, 255));
         Panneau_couleur.setLayout(new java.awt.GridLayout(2, 4));
