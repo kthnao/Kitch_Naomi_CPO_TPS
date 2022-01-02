@@ -29,7 +29,7 @@ public class Plateau {
     public Plateau() {//contrusteur de la classe 
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
-                CellulesPlateau[i][j] = new Pion("vide"); //12 lignes et 4 colonnes de pion d'aucune couleur
+                CellulesPlateau[i][j] = new Pion("vide"); //12 lignes et 12 colonnes de pion d'aucune couleur
             }
         }
     }
@@ -156,6 +156,7 @@ public class Plateau {
         }
         for (int j = limite-1; j >=0; j--) {
             langbonnecouleur.tablang[j] = pionblanc;
+            //le reste des pions du tableau sont blanc c'est à dire neutre, cela me permet aussi de rénitialiser la languette à chaque tour si le joueur n'a plus aucun pion de bonne couleur
         }
         return langbonnecouleur;
     }
@@ -172,6 +173,7 @@ public class Plateau {
         }
         for (int j = 8 + nbbonnecetp; j < 12; j++) {
             langbonnecetp.tablang[j] = pionblanc;
+            //le reste des pions du tableau sont blanc c'est à dire neutre, cela me permet aussi de rénitialiser la languette à chaque tour si le joueur n'a plus aucun pion de bonne couleur et de bonne place
         }
 
         return langbonnecetp;
@@ -193,26 +195,7 @@ public class Plateau {
         Pion vide=new Pion("vide");
         combiproposee.tabcombi[placecombi]=vide;
         return combiproposee;
-        
-        /*prend une combianais et supprime le dernier pion du tableau ayant une couleur différente de "vide"
-        if (combiproposee.tabcombi[3].couleur != "vide") { //si la couleur du pion de la dernière case n'est pas "vide" 
-            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[3].couleur = "vide";
-            return combiproposee;
-        } else if (combiproposee.tabcombi[2].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
-            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[2].couleur = "vide";
-            return combiproposee;
-        } else if (combiproposee.tabcombi[1].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
-            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[1].couleur = "vide";
-            return combiproposee;
-        } else if (combiproposee.tabcombi[0].couleur != "vide") {//si la couleur du pion de la dernière case n'est pas "vide" 
-            //alors cette couleur renvoie vide et on retourne la nouvelle combinaison
-            combiproposee.tabcombi[0].couleur = "vide";
-            return combiproposee;
-        }
-        return combiproposee; //si toutes les pions ont la couleur "vide" alors on retourne la combinaison */
+
 
     }
 
@@ -220,39 +203,61 @@ public class Plateau {
 
         //fonction d’affichage de la grille sur la console. 
         //Doit faire apparaitre les couleurs des pions des combinaisons
-        for (int i = 11; i >= 0; i--) {
-            for (int j = 0; j < 12; j++) {
-                if (CellulesPlateau[i][j].couleur == "vide") {
-                    System.out.print("\033[30m X ");
+        for (int i = 11; i >= 0; i--) {//on fait à l'inverse afin d'avoir l'élément [1][1] en bas à gauche de la grille du plateau de jeu
+            for (int j = 0; j < 12; j++) {//il y a 12 colonnes
+                if (CellulesPlateau[i][j].couleur == "vide") {//si la couleur du pion de la cellule est "vide"
+                    System.out.print("\033[30m X ");//on affiche un X noir
                 }
                 if (j == 0 && CellulesPlateau[i][j].couleur == "rougel" || j == 1 && CellulesPlateau[i][j].couleur == "rougel" || j == 2 && CellulesPlateau[i][j].couleur == "rougel" || j == 3 && CellulesPlateau[i][j].couleur == "rougel") {
+                   //si la couleur du pion de la cellule est "rougel" et que j==0 ou 1 ou 2 ou 3 
                     System.out.print("\033[31m X ");
+                    //On affiche un X rouge
                 } else if (j == 8 && CellulesPlateau[i][j].couleur == "vertl" || j == 9 && CellulesPlateau[i][j].couleur == "vertl" || j == 10 && CellulesPlateau[i][j].couleur == "vertl" || j == 11 && CellulesPlateau[i][j].couleur == "vertl") {
+                    //si la couleur du pion de la cellule est "vertl" et que j==8 ou 9 ou 10 ou 11
                     System.out.print("\033[32m X ");
+                     //On affiche un X Vert
                 } else if (j == 0 && CellulesPlateau[i][j].couleur == "blancl" || j == 1 && CellulesPlateau[i][j].couleur == "blancl" || j == 2 && CellulesPlateau[i][j].couleur == "blancl" || j == 3 && CellulesPlateau[i][j].couleur == "blancl" || j == 8 && CellulesPlateau[i][j].couleur == "blancl" || j == 9 && CellulesPlateau[i][j].couleur == "blancl" || j == 10 && CellulesPlateau[i][j].couleur == "blancl" || j == 11 && CellulesPlateau[i][j].couleur == "blancl") {
+                   //si la couleur du pion de la cellule est "rougel" et que j==0 ou 1 ou 2 ou 3 ou 8 ou 9 ou 10 ou 11
                     System.out.print("\033[37m X ");
+                    //On affiche un X Blanc/Gris
 
                 } else if (CellulesPlateau[i][j].couleur == "rouge") {
+                    //si la couleur du pion de la cellule est "rouge"
                     System.out.print("\033[31m O ");
+                    //On affiche un O rouge
                 } else if (CellulesPlateau[i][j].couleur == "noir") {
+                    //si la couleur du pion de la cellule est "noir"
                     System.out.print("\033[30m O ");
+                    //On affiche un O noir
                 } else if (CellulesPlateau[i][j].couleur == "bleu") {
+                    //si la couleur du pion de la cellule est "bleu"
                     System.out.print("\033[34m O ");
+                    //On affiche un O bleu
                 } else if (CellulesPlateau[i][j].couleur == "blanc") {
+                    //si la couleur du pion de la cellule est "blanc"
                     System.out.print("\033[37m O ");
+                    //On affiche un O blanc
                 } else if (CellulesPlateau[i][j].couleur == "jaune") {
+                    //si la couleur du pion de la cellule est "jaune"
                     System.out.print("\033[33m O ");
+                    //On affiche un O jaune
                 } else if (CellulesPlateau[i][j].couleur == "fuschia") {
+                    //si la couleur du pion de la cellule est "fuschia"
                     System.out.print("\033[35m O ");
+                    //On affiche un O fuschia
                 } else if (CellulesPlateau[i][j].couleur == "vert") {
+                    //si la couleur du pion de la cellule est "vert"
                     System.out.print("\033[32m O ");
+                    //On affiche un O vert
                 } else if (CellulesPlateau[i][j].couleur == "turquoise") {
+                    //si la couleur du pion de la cellule est "turquoise"
                     System.out.print("\033[36m O ");
+                    //On affiche un O turquoise
 
                 }
 
             }
-            System.out.println(""); //sinon on affiche rien
+            System.out.println(""); //sinon on affiche rien, permet aussi de faire les retour à la ligne
         }
 
     }
