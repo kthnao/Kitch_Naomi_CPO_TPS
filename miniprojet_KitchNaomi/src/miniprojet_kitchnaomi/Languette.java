@@ -12,12 +12,12 @@ package miniprojet_kitchnaomi;
 public class Languette {
     
     Pion [] tablang=new Pion[12];
-    String couleurlang;//peut être rouge ou blanche
+    String couleurlang;//peut être rouge ou verte
     
     public Languette(){//contrusteur de la classe 
         for (int i=0; i<12;i++){
             
-                tablang[i]=new Pion("vide"); //composé de 4 cases de pion de couleur "vide"
+                tablang[i]=new Pion("blancl"); //composé de 4 cases de pion de couleur blanc
   
             
         }

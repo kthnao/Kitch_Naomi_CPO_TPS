@@ -19,12 +19,13 @@ public class Miniprojet_KitchNaomi {
         /*idée d'ajout d'option : ajout de couleur, aggrandir le plateau(la grille), 
 choisir le nombre d'essaies...*/
       
-              Joueur J1=new Joueur("Nao");
+             Joueur J1=new Joueur("Nao");
         Partie test=new Partie(J1);
         test.debuterpartie();
      
      //rajouter la fonction suppression annuler, régler les bug d'affichage, mais avant tout rajouter les languettes à l'affichage
-         
+        // System.out.print("\033[42m   ");
+         //System.out.print("\033[47m   ");
     }
     
 }
