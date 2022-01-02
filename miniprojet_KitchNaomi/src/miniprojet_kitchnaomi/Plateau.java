@@ -13,22 +13,22 @@ import java.util.Random;
  */
 public class Plateau {
 
-    Pion[][] CellulesPlateau = new Pion[12][4];
+    Pion[][] CellulesPlateau = new Pion[12][12];
     Combinaison Combimystere = new Combinaison();//Combinaison mystérieuse que le joueur doit deviner 
     Languette langbonnecouleur = new Languette();//Languette correspondant aux nb de pions de bonne couleur
     Languette langbonnecetp = new Languette();//Languette correspondant aux nb de pions de bonne couleur et bonne position
     Pion pionR = new Pion("rouge");
     Pion pionV = new Pion("vert");
     Pion pionJ = new Pion("jaune");
-    Pion pionO = new Pion("orange");
+    Pion pionN = new Pion("noir");
     Pion pionB = new Pion("bleu");
     Pion pionM = new Pion("mauve");
     Pion pionBlc = new Pion("blanc");
-    Pion pionF = new Pion("fuschia");
+    Pion pionT = new Pion("turquoise");
 
     public Plateau() {//contrusteur de la classe 
         for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 12; j++) {
                 CellulesPlateau[i][j] = new Pion("vide"); //12 lignes et 4 colonnes de pion d'aucune couleur
             }
         }
@@ -146,21 +146,21 @@ public class Plateau {
 
     public Languette affichagelangbonnecouleur(int nbbonnecouleur) {
         //Remplie de pion blanc le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
-        Pion pionBl = new Pion("blanc");
+        Pion pionrouge = new Pion("rouge");
         for (int i = 0; i < nbbonnecouleur; i++) {
-            langbonnecouleur.tablang[i] = pionBl;
-            langbonnecouleur.couleurlang = pionBl.couleur;//la couleur de la languette correspond à la couleur des pions
+            langbonnecouleur.tablang[i] = pionrouge;
+            langbonnecouleur.couleurlang = pionrouge.couleur;//la couleur de la languette correspond à la couleur des pions
         }
         return langbonnecouleur;
     }
 
     public Languette affichagelangbonnecetp(int nbbonnecetp) {
         //Remplie de pion reouge le nombre de case correspondant au nombre de pion de bonne couleur et renvoie le tableau
-        Pion pionrouge = new Pion("rouge");
+        Pion pionvert = new Pion("vert");
         for (int i = 0; i < nbbonnecetp; i++) {
-            langbonnecetp.tablang[i] = pionrouge;
+            langbonnecetp.tablang[i] = pionvert;
         }
-        langbonnecetp.couleurlang = pionrouge.couleur;//la couleur de la languette correspond à la couleur des pions
+        langbonnecetp.couleurlang = pionvert.couleur;//la couleur de la languette correspond à la couleur des pions
         return langbonnecetp;
     }
 
@@ -201,46 +201,40 @@ public class Plateau {
     }
 
     public void afficherPlateauSurConsole() {
-        
+
         //fonction d’affichage de la grille sur la console. 
         //Doit faire apparaitre les couleurs des pions des combinaisons
-        for (int i = 11; i >= 0; i--) { 
-            for (int j = 0; j < 4; j++) {
+        for (int i = 11; i >= 0; i--) {
+            for (int j = 0; j < 12; j++) {
 
-                String couleur_pion = CellulesPlateau[i][j].couleur;
-                switch (couleur_pion) {
-                    case "vide":
-                        System.out.print("");
-                        break;
-                    case "rouge":
-                        System.out.print("\033[41m   ");
-                        break;
-                    case "gris":
-                        System.out.print("\033[47m  ");
-                        break;
-                    case "bleu":
-                        System.out.print("\033[44m  ");
-                        break;
-                    case "blanc":
-                        System.out.print("\033[47m   ");
-                        break;
-                    case "jaune":
-                        System.out.print("\033[43m  ");
-                        break;
-                    case "mauve":
-                        System.out.print("\033[45m   ");
-                        break;
-                    case "vert":
-                        System.out.print("\033[42m  ");
-                        break;
-                    case "turquoise":
-                        System.out.print("\033[46m  ");
-                        break;
-                    //System.out.println(""); //sinon on affiche rien
+                if (langbonnecouleur.tablang[j].couleur == "rouge" && CellulesPlateau[i][j].couleur == "rouge") {
+                    System.out.print("\033[31m   ");
+                } else if (langbonnecetp.tablang[j].couleur == "vert" && CellulesPlateau[i][j].couleur == "vert") {
+                    System.out.print("\033[31m   ");
+                } else if (CellulesPlateau[i][j].couleur == "vide") {
+                    System.out.print(" X ");
+                } else if (CellulesPlateau[i][j].couleur == "rouge") {
+                    System.out.print("\033[31m O ");
+                } else if (CellulesPlateau[i][j].couleur == "noir") {
+                    System.out.print("\033[30m O ");
+                } else if (CellulesPlateau[i][j].couleur == "bleu") {
+                    System.out.print("\033[34m O ");
+                } else if (CellulesPlateau[i][j].couleur == "blanc") {
+                    System.out.print("\033[37m O ");
+                } else if (CellulesPlateau[i][j].couleur == "jaune") {
+                    System.out.print("\033[33m O ");
+                } else if (CellulesPlateau[i][j].couleur == "mauve") {
+                    System.out.print("\033[35m O ");
+                } else if (CellulesPlateau[i][j].couleur == "vert") {
+                    System.out.print("\033[32m O ");
+                } else if (CellulesPlateau[i][j].couleur == "turquoise") {
+                    System.out.print("\033[36m O ");
+
                 }
 
             }
-
+            System.out.println(""); //sinon on affiche rien
         }
+
     }
 }
